@@ -62,9 +62,17 @@ async function loadData(){ try{ const res=await fetch(DATA_URL + '?v=' + Date.no
 document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');['groups','knockout','all'].forEach(t=>$(t+'View').classList.toggle('hidden',t!==btn.dataset.tab));}));
 
 /* Host venue cards:
-   Venue details are rendered as an overlay so KPI cards and filters below do not move.
-   Only one host country is open at a time.
+   - Desktop: hover opens and mouse leave closes.
+   - Mobile/tablet: tap opens; tapping the same country again closes it.
+   - Tapping another country closes the previous one and opens the selected one.
+   - Venue details are an overlay, so KPI cards and filters do not move.
 */
+function closeHostCards(){
+  document.querySelectorAll('.host').forEach(card=>{
+    card.classList.remove('open');
+    card.setAttribute('aria-expanded','false');
+  });
+}
 function openHostCard(selected){
   document.querySelectorAll('.host').forEach(card=>{
     const isSelected = card === selected;
@@ -74,8 +82,18 @@ function openHostCard(selected){
 }
 document.querySelectorAll('.host').forEach(card=>{
   card.addEventListener('mouseenter',()=>openHostCard(card));
+  card.addEventListener('mouseleave',()=>closeHostCards());
   card.addEventListener('focus',()=>openHostCard(card));
-  card.addEventListener('click',()=>openHostCard(card));
+  card.addEventListener('blur',()=>closeHostCards());
+  card.addEventListener('click',(event)=>{
+    event.preventDefault();
+    event.stopPropagation();
+    if(card.classList.contains('open')) closeHostCards();
+    else openHostCard(card);
+  });
+});
+document.addEventListener('click',(event)=>{
+  if(!event.target.closest('.host')) closeHostCards();
 });
 loadData(); setInterval(loadData, REFRESH_MS);
 </script>
