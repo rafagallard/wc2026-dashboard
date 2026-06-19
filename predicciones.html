@@ -486,6 +486,7 @@ $('showSelectedHistory').addEventListener('click',renderSelectedHistory);
 $('showAllHistory').addEventListener('click',renderAllHistory);
 
 loadData();
+setInterval(loadData, 60 * 60 * 1000);
 </script>
 </body>
 </html>
