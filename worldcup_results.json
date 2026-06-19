@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-19T03:59:15+00:00",
+  "updatedAt": "2026-06-19T22:54:53+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -403,12 +403,12 @@
       "stage": "Fase de grupos",
       "group": "D",
       "team1": "Estados Unidos",
-      "score": "",
+      "score": "2 - 0",
       "team2": "Australia",
-      "status": "Programado",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Lumen Field / Seattle Stadium, Seattle, Estados Unidos",
-      "notes": "Grupo D"
+      "notes": "Grupo D · ESPN automatic update"
     },
     {
       "id": "66456934",
@@ -417,12 +417,12 @@
       "stage": "Fase de grupos",
       "group": "C",
       "team1": "Escocia",
-      "score": "",
+      "score": "0 - 1",
       "team2": "Marruecos",
-      "status": "Programado",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Gillette Stadium / Boston Stadium, Foxborough, Estados Unidos",
-      "notes": "Grupo C"
+      "notes": "Grupo C · FIFA automatic update"
     },
     {
       "id": "66456932",
@@ -433,10 +433,10 @@
       "team1": "Brasil",
       "score": "",
       "team2": "Haití",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Lincoln Financial Field / Philadelphia Stadium, Filadelfia, Estados Unidos",
-      "notes": "Grupo C"
+      "notes": "Grupo C · FIFA automatic update"
     },
     {
       "id": "66456946",
@@ -447,10 +447,10 @@
       "team1": "Turquía",
       "score": "",
       "team2": "Paraguay",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Levi’s Stadium / San Francisco Bay Area Stadium, Santa Clara, Estados Unidos",
-      "notes": "Grupo D"
+      "notes": "Grupo D · FIFA automatic update"
     },
     {
       "id": "66456972",
@@ -461,10 +461,10 @@
       "team1": "Países Bajos",
       "score": "",
       "team2": "Suecia",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "NRG Stadium / Houston Stadium, Houston, Estados Unidos",
-      "notes": "Grupo F"
+      "notes": "Grupo F · FIFA automatic update"
     },
     {
       "id": "66457074",
@@ -489,10 +489,10 @@
       "team1": "Ecuador",
       "score": "",
       "team2": "Curazao",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Arrowhead Stadium / Kansas City Stadium, Kansas City, Estados Unidos",
-      "notes": "Grupo E"
+      "notes": "Grupo E · FIFA automatic update"
     },
     {
       "id": "66456974",
@@ -503,10 +503,10 @@
       "team1": "Túnez",
       "score": "",
       "team2": "Japón",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "México",
       "venue": "Estadio BBVA / Estadio Monterrey, Monterrey, México",
-      "notes": "Grupo F"
+      "notes": "Grupo F · FIFA automatic update"
     },
     {
       "id": "66456998",
@@ -517,10 +517,10 @@
       "team1": "España",
       "score": "",
       "team2": "Arabia Saudita",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Mercedes-Benz Stadium / Atlanta Stadium, Atlanta, Estados Unidos",
-      "notes": "Grupo H"
+      "notes": "Grupo H · FIFA automatic update"
     },
     {
       "id": "66456986",
@@ -545,10 +545,10 @@
       "team1": "Uruguay",
       "score": "",
       "team2": "Cabo Verde",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
-      "notes": "Grupo H"
+      "notes": "Grupo H · FIFA automatic update"
     },
     {
       "id": "66456988",
@@ -559,10 +559,10 @@
       "team1": "Nueva Zelanda",
       "score": "",
       "team2": "Egipto",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Canadá",
       "venue": "BC Place / Vancouver Stadium, Vancouver, Canadá",
-      "notes": "Grupo G"
+      "notes": "Grupo G · FIFA automatic update"
     },
     {
       "id": "66457022",
@@ -573,10 +573,10 @@
       "team1": "Argentina",
       "score": "",
       "team2": "Austria",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
-      "notes": "Grupo J"
+      "notes": "Grupo J · FIFA automatic update"
     },
     {
       "id": "66457010",
@@ -587,10 +587,10 @@
       "team1": "Francia",
       "score": "",
       "team2": "Irak",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Lincoln Financial Field / Philadelphia Stadium, Filadelfia, Estados Unidos",
-      "notes": "Grupo I"
+      "notes": "Grupo I · FIFA automatic update"
     },
     {
       "id": "66457012",
@@ -601,10 +601,10 @@
       "team1": "Noruega",
       "score": "",
       "team2": "Senegal",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "MetLife Stadium / New York New Jersey Stadium, East Rutherford, Estados Unidos",
-      "notes": "Grupo I"
+      "notes": "Grupo I · FIFA automatic update"
     },
     {
       "id": "66457024",
@@ -615,10 +615,10 @@
       "team1": "Jordania",
       "score": "",
       "team2": "Argelia",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Levi’s Stadium / San Francisco Bay Area Stadium, Santa Clara, Estados Unidos",
-      "notes": "Grupo J"
+      "notes": "Grupo J · FIFA automatic update"
     },
     {
       "id": "66457034",
@@ -629,10 +629,10 @@
       "team1": "Portugal",
       "score": "",
       "team2": "Uzbekistán",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "NRG Stadium / Houston Stadium, Houston, Estados Unidos",
-      "notes": "Grupo K"
+      "notes": "Grupo K · FIFA automatic update"
     },
     {
       "id": "66457046",
@@ -643,10 +643,10 @@
       "team1": "Inglaterra",
       "score": "",
       "team2": "Ghana",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Gillette Stadium / Boston Stadium, Foxborough, Estados Unidos",
-      "notes": "Grupo L"
+      "notes": "Grupo L · FIFA automatic update"
     },
     {
       "id": "66457048",
@@ -657,10 +657,10 @@
       "team1": "Panamá",
       "score": "",
       "team2": "Croacia",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Canadá",
       "venue": "BMO Field / Toronto Stadium, Toronto, Canadá",
-      "notes": "Grupo L"
+      "notes": "Grupo L · FIFA automatic update"
     },
     {
       "id": "66457036",
@@ -671,10 +671,10 @@
       "team1": "Colombia",
       "score": "",
       "team2": "RD Congo",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "México",
       "venue": "Estadio Akron / Estadio Guadalajara, Guadalajara/Zapopan, México",
-      "notes": "Grupo K"
+      "notes": "Grupo K · FIFA automatic update"
     },
     {
       "id": "66456924",
@@ -685,10 +685,10 @@
       "team1": "Suiza",
       "score": "",
       "team2": "Canadá",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Canadá",
       "venue": "BC Place / Vancouver Stadium, Vancouver, Canadá",
-      "notes": "Grupo B"
+      "notes": "Grupo B · FIFA automatic update"
     },
     {
       "id": "66456926",
@@ -699,10 +699,10 @@
       "team1": "Bosnia y Herzegovina",
       "score": "",
       "team2": "Qatar",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Lumen Field / Seattle Stadium, Seattle, Estados Unidos",
-      "notes": "Grupo B"
+      "notes": "Grupo B · FIFA automatic update"
     },
     {
       "id": "66456936",
@@ -713,10 +713,10 @@
       "team1": "Escocia",
       "score": "",
       "team2": "Brasil",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
-      "notes": "Grupo C"
+      "notes": "Grupo C · FIFA automatic update"
     },
     {
       "id": "66456938",
@@ -727,10 +727,10 @@
       "team1": "Marruecos",
       "score": "",
       "team2": "Haití",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Mercedes-Benz Stadium / Atlanta Stadium, Atlanta, Estados Unidos",
-      "notes": "Grupo C"
+      "notes": "Grupo C · FIFA automatic update"
     },
     {
       "id": "66456912",
@@ -741,10 +741,10 @@
       "team1": "Chequia",
       "score": "",
       "team2": "México",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "México",
       "venue": "Estadio Azteca / Mexico City Stadium, Ciudad de México, México",
-      "notes": "Grupo A"
+      "notes": "Grupo A · FIFA automatic update"
     },
     {
       "id": "66456914",
@@ -755,10 +755,10 @@
       "team1": "Sudáfrica",
       "score": "",
       "team2": "Corea del Sur",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "México",
       "venue": "Estadio BBVA / Estadio Monterrey, Monterrey, México",
-      "notes": "Grupo A"
+      "notes": "Grupo A · FIFA automatic update"
     },
     {
       "id": "66457078",
@@ -769,10 +769,10 @@
       "team1": "Ecuador",
       "score": "",
       "team2": "Alemania",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "MetLife Stadium / New York New Jersey Stadium, East Rutherford, Estados Unidos",
-      "notes": "Grupo E"
+      "notes": "Grupo E · FIFA automatic update"
     },
     {
       "id": "66457080",
@@ -797,10 +797,10 @@
       "team1": "Túnez",
       "score": "",
       "team2": "Países Bajos",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Arrowhead Stadium / Kansas City Stadium, Kansas City, Estados Unidos",
-      "notes": "Grupo F"
+      "notes": "Grupo F · FIFA automatic update"
     },
     {
       "id": "66456978",
@@ -811,10 +811,10 @@
       "team1": "Japón",
       "score": "",
       "team2": "Suecia",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
-      "notes": "Grupo F"
+      "notes": "Grupo F · FIFA automatic update"
     },
     {
       "id": "66456948",
@@ -825,10 +825,10 @@
       "team1": "Turquía",
       "score": "",
       "team2": "Estados Unidos",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "SoFi Stadium / Los Angeles Stadium, Los Ángeles, Estados Unidos",
-      "notes": "Grupo D"
+      "notes": "Grupo D · FIFA automatic update"
     },
     {
       "id": "66456950",
@@ -839,10 +839,10 @@
       "team1": "Paraguay",
       "score": "",
       "team2": "Australia",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Levi’s Stadium / San Francisco Bay Area Stadium, Santa Clara, Estados Unidos",
-      "notes": "Grupo D"
+      "notes": "Grupo D · FIFA automatic update"
     },
     {
       "id": "66457014",
@@ -853,10 +853,10 @@
       "team1": "Noruega",
       "score": "",
       "team2": "Francia",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Gillette Stadium / Boston Stadium, Foxborough, Estados Unidos",
-      "notes": "Grupo I"
+      "notes": "Grupo I · FIFA automatic update"
     },
     {
       "id": "66457016",
@@ -867,10 +867,10 @@
       "team1": "Senegal",
       "score": "",
       "team2": "Irak",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Canadá",
       "venue": "BMO Field / Toronto Stadium, Toronto, Canadá",
-      "notes": "Grupo I"
+      "notes": "Grupo I · FIFA automatic update"
     },
     {
       "id": "66457002",
@@ -881,10 +881,10 @@
       "team1": "Uruguay",
       "score": "",
       "team2": "España",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "México",
       "venue": "Estadio Akron / Estadio Guadalajara, Guadalajara/Zapopan, México",
-      "notes": "Grupo H"
+      "notes": "Grupo H · FIFA automatic update"
     },
     {
       "id": "66457004",
@@ -895,10 +895,10 @@
       "team1": "Cabo Verde",
       "score": "",
       "team2": "Arabia Saudita",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "NRG Stadium / Houston Stadium, Houston, Estados Unidos",
-      "notes": "Grupo H"
+      "notes": "Grupo H · FIFA automatic update"
     },
     {
       "id": "66456990",
@@ -909,10 +909,10 @@
       "team1": "Nueva Zelanda",
       "score": "",
       "team2": "Bélgica",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Canadá",
       "venue": "BC Place / Vancouver Stadium, Vancouver, Canadá",
-      "notes": "Grupo G"
+      "notes": "Grupo G · FIFA automatic update"
     },
     {
       "id": "66456992",
@@ -937,10 +937,10 @@
       "team1": "Panamá",
       "score": "",
       "team2": "Inglaterra",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "MetLife Stadium / New York New Jersey Stadium, East Rutherford, Estados Unidos",
-      "notes": "Grupo L"
+      "notes": "Grupo L · FIFA automatic update"
     },
     {
       "id": "66457052",
@@ -951,10 +951,10 @@
       "team1": "Croacia",
       "score": "",
       "team2": "Ghana",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Lincoln Financial Field / Philadelphia Stadium, Filadelfia, Estados Unidos",
-      "notes": "Grupo L"
+      "notes": "Grupo L · FIFA automatic update"
     },
     {
       "id": "66457038",
@@ -965,10 +965,10 @@
       "team1": "Colombia",
       "score": "",
       "team2": "Portugal",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
-      "notes": "Grupo K"
+      "notes": "Grupo K · FIFA automatic update"
     },
     {
       "id": "66457040",
@@ -979,10 +979,10 @@
       "team1": "RD Congo",
       "score": "",
       "team2": "Uzbekistán",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Mercedes-Benz Stadium / Atlanta Stadium, Atlanta, Estados Unidos",
-      "notes": "Grupo K"
+      "notes": "Grupo K · FIFA automatic update"
     },
     {
       "id": "66457026",
@@ -993,10 +993,10 @@
       "team1": "Jordania",
       "score": "",
       "team2": "Argentina",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
-      "notes": "Grupo J"
+      "notes": "Grupo J · FIFA automatic update"
     },
     {
       "id": "66457028",
@@ -1007,10 +1007,10 @@
       "team1": "Argelia",
       "score": "",
       "team2": "Austria",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Arrowhead Stadium / Kansas City Stadium, Kansas City, Estados Unidos",
-      "notes": "Grupo J"
+      "notes": "Grupo J · FIFA automatic update"
     },
     {
       "id": "P73",
