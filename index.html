@@ -28,7 +28,7 @@
   </style>
 </head>
 <body>
-<header><div class="hero"><div><h1>Copa Mundial 2026</h1><div class="sub">Dashboard ejecutivo de grupos, resultados y llave · datos actualizados automáticamente</div></div><div class="statusbar"><a class="nav-link" href="predicciones.html">Predicciones</a><div class="pill">Actualizado: <span id="lastUpdated">—</span></div><div class="pill">Refresco: cada 1 hora</div><div class="pill">Horario: CDMX</div></div></div></header>
+<header><div class="hero"><div><h1>Copa Mundial 2026</h1><div class="sub">Dashboard ejecutivo de grupos, resultados y llave · datos actualizados automáticamente</div></div><div class="statusbar"><a class="nav-link" href="predicciones.html">Predicciones</a><div class="pill">Actualizado: <span id="lastUpdated">—</span></div><div class="pill">Refresco: cada 1 hora</div><div class="pill">Horario: <span id="timeZoneLabel">Local</span></div></div></div></header>
 <main>
   <section class="hosts"><div class="host mex" tabindex="0" role="button" aria-expanded="false">México <small>CDMX · Guadalajara · Monterrey</small><div class="host-details"><ul><li>Ciudad de México · Estadio Azteca / Mexico City Stadium</li><li>Guadalajara/Zapopan · Estadio Akron / Estadio Guadalajara</li><li>Monterrey · Estadio BBVA / Estadio Monterrey</li></ul></div></div><div class="host usa" tabindex="0" role="button" aria-expanded="false">Estados Unidos <small>11 ciudades sede</small><div class="host-details"><ul><li>Atlanta · Mercedes-Benz Stadium</li><li>Boston/Foxborough · Gillette Stadium</li><li>Dallas/Arlington · AT&amp;T Stadium</li><li>Houston · NRG Stadium</li><li>Kansas City · Arrowhead Stadium</li><li>Los Ángeles · SoFi Stadium</li><li>Miami · Hard Rock Stadium</li><li>New York/New Jersey · MetLife Stadium</li><li>Philadelphia · Lincoln Financial Field</li><li>San Francisco Bay Area · Levi’s Stadium</li><li>Seattle · Lumen Field</li></ul></div></div><div class="host can" tabindex="0" role="button" aria-expanded="false">Canadá <small>Toronto · Vancouver</small><div class="host-details"><ul><li>Toronto · BMO Field / Toronto Stadium</li><li>Vancouver · BC Place / Vancouver Stadium</li></ul></div></div></section>
   <section class="metrics"><div class="metric"><div class="k">Total</div><div class="v" id="totalGames">0</div><div class="s">Partidos</div></div><div class="metric"><div class="k">Jugados</div><div class="v" id="playedGames">0</div><div class="s">Con marcador</div></div><div class="metric"><div class="k">Por jugar</div><div class="v" id="upcomingGames">0</div><div class="s">Programados / por definir</div></div><div class="metric"><div class="k">Hoy</div><div class="v" id="todayGames">0</div><div class="s">Partidos del día</div></div><div class="metric"><div class="k">Grupos</div><div class="v">12</div><div class="s">A–L</div></div><div class="metric"><div class="k">Eliminatoria</div><div class="v" id="koCount">0</div><div class="s">Llave</div></div></section>
@@ -44,7 +44,29 @@ const REFRESH_MS = 1 * 60 * 60 * 1000;
 const FLAGS = {'México':'🇲🇽','Sudáfrica':'🇿🇦','Corea del Sur':'🇰🇷','Korea Republic':'🇰🇷','Chequia':'🇨🇿','Czechia':'🇨🇿','Canadá':'🇨🇦','Bosnia y Herzegovina':'🇧🇦','Qatar':'🇶🇦','Suiza':'🇨🇭','Estados Unidos':'🇺🇸','Paraguay':'🇵🇾','Australia':'🇦🇺','Turquía':'🇹🇷','Brasil':'🇧🇷','Marruecos':'🇲🇦','Haití':'🇭🇹','Escocia':'🏴','Alemania':'🇩🇪','Curazao':'🇨🇼','Costa de Marfil':'🇨🇮','Ecuador':'🇪🇨','Países Bajos':'🇳🇱','Japón':'🇯🇵','Suecia':'🇸🇪','Túnez':'🇹🇳','Bélgica':'🇧🇪','Egipto':'🇪🇬','Irán':'🇮🇷','Nueva Zelanda':'🇳🇿','España':'🇪🇸','Cabo Verde':'🇨🇻','Arabia Saudita':'🇸🇦','Uruguay':'🇺🇾','Francia':'🇫🇷','Senegal':'🇸🇳','Irak':'🇮🇶','Noruega':'🇳🇴','Argentina':'🇦🇷','Argelia':'🇩🇿','Austria':'🇦🇹','Jordania':'🇯🇴','Portugal':'🇵🇹','RD Congo':'🇨🇩','Uzbekistán':'🇺🇿','Colombia':'🇨🇴','Inglaterra':'🏴','Croacia':'🇭🇷','Ghana':'🇬🇭','Panamá':'🇵🇦'};
 let games = [];
 const $ = id => document.getElementById(id);
-function fmtDate(d,t){ const date=new Date(`${d}T${t||'00:00'}:00`); return date.toLocaleString('es-MX',{weekday:'short',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}); }
+function sourceDateTime(g){
+  // Match schedule in the JSON is treated as Mexico City time.
+  // Mexico City is UTC-06:00 for the tournament period.
+  const time = g.time || '00:00';
+  return new Date(`${g.date}T${time}:00-06:00`);
+}
+function localDateKey(date){
+  return new Intl.DateTimeFormat('en-CA',{year:'numeric',month:'2-digit',day:'2-digit'}).format(date);
+}
+function todayLocalDate(){
+  return localDateKey(new Date());
+}
+function fmtDate(d,t){
+  const date = sourceDateTime({date:d,time:t});
+  return date.toLocaleString('es-MX',{
+    weekday:'short',
+    day:'2-digit',
+    month:'short',
+    hour:'2-digit',
+    minute:'2-digit',
+    timeZoneName:'short'
+  });
+}
 function normStatus(s){ return (s||'Por definir').replaceAll(' ','-'); }
 function isFinal(g){ return g.status==='Final' && /\d+\s*-\s*\d+/.test(g.score||''); }
 function parseScore(s){ const m=(s||'').match(/(\d+)\s*-\s*(\d+)/); return m?[+m[1],+m[2]]:null; }
@@ -52,10 +74,20 @@ function filtered(){ const q=$('search').value.trim().toLowerCase(), st=$('stage
 function buildOptions(){ const stages=[...new Set(games.map(g=>g.stage))]; const groups=[...new Set(games.filter(g=>g.group && g.group!=='KO').map(g=>g.group))].sort(); $('stageFilter').innerHTML='<option value="">Todas las fases</option>'+stages.map(x=>`<option>${x}</option>`).join(''); $('groupFilter').innerHTML='<option value="">Todos los grupos</option>'+groups.map(x=>`<option>${x}</option>`).join(''); }
 function standings(groupGames){ const table={}; groupGames.forEach(g=>[g.team1,g.team2].forEach(t=>{ if(!table[t]) table[t]={team:t,pts:0,j:0,gf:0,gc:0,dg:0}; })); groupGames.filter(isFinal).forEach(g=>{ const [a,b]=parseScore(g.score); const A=table[g.team1], B=table[g.team2]; A.j++;B.j++;A.gf+=a;A.gc+=b;B.gf+=b;B.gc+=a;A.dg=A.gf-A.gc;B.dg=B.gf-B.gc; if(a>b) A.pts+=3; else if(b>a) B.pts+=3; else {A.pts++;B.pts++;} }); return Object.values(table).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf||a.team.localeCompare(b.team)); }
 function matchCard(g){ const score=g.score?g.score:'vs'; return `<article class="match" data-host="${g.host||''}"><div class="match-top"><div class="date">${fmtDate(g.date,g.time)} · ${g.stage}${g.group&&g.group!=='KO'?' · Grupo '+g.group:''}</div><span class="badge ${normStatus(g.status)}">${g.status||'Por definir'}</span></div><div class="scoreline"><div class="team">${FLAGS[g.team1]||''} ${g.team1}</div><div class="score ${g.score?'':'empty-score'}">${score}</div><div class="team right">${g.team2} ${FLAGS[g.team2]||''}</div></div><div class="venue">${g.venue||''}</div>${g.notes?`<div class="note">${g.notes}</div>`:''}</article>`; }
-function renderGroups(){ const data=filtered().filter(g=>g.group&&g.group!=='KO'); const groups=[...new Set(data.map(g=>g.group))].sort(); $('groupsGrid').innerHTML=groups.map(gr=>{ const list=data.filter(g=>g.group===gr).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)); const rank=standings(games.filter(g=>g.group===gr)); return `<section class="group-card"><div class="group-head"><div><h3>Grupo ${gr}</h3><div class="teams-line">${rank.map(r=>`${FLAGS[r.team]||''} ${r.team}`).join(' · ')}</div></div><div class="group-meta">${list.filter(isFinal).length}/${list.length} jugados</div></div><div class="rank"><div class="rank-row header"><span>#</span><span>Equipo</span><span>Pts</span><span>J</span><span>GF</span><span>GC</span><span>DG</span><span></span></div>${rank.map((r,i)=>`<div class="rank-row ${i<2?'advance':i===2?'third':''}"><span>${i+1}</span><span class="rank-team">${FLAGS[r.team]||''} ${r.team}</span><span>${r.pts}</span><span>${r.j}</span><span>${r.gf}</span><span>${r.gc}</span><span>${r.dg}</span><span>${i<2?'↑':i===2?'•':''}</span></div>`).join('')}</div><div class="matches">${list.map(matchCard).join('')}</div></section>`; }).join('') || '<div class="empty">No hay partidos para los filtros seleccionados.</div>'; }
-function renderAll(){ const data=filtered().sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)); const stages=[...new Set(data.map(g=>g.stage))]; $('phaseGrid').innerHTML=stages.map(st=>`<section class="group-card"><div class="group-head"><div><h3>${st}</h3><div class="teams-line">${data.filter(g=>g.stage===st).length} partidos</div></div></div><div class="matches">${data.filter(g=>g.stage===st).map(matchCard).join('')}</div></section>`).join('') || '<div class="empty">No hay partidos para los filtros seleccionados.</div>'; }
+function renderGroups(){ const data=filtered().filter(g=>g.group&&g.group!=='KO'); const groups=[...new Set(data.map(g=>g.group))].sort(); $('groupsGrid').innerHTML=groups.map(gr=>{ const list=data.filter(g=>g.group===gr).sort((a,b)=>sourceDateTime(a)-sourceDateTime(b)); const rank=standings(games.filter(g=>g.group===gr)); return `<section class="group-card"><div class="group-head"><div><h3>Grupo ${gr}</h3><div class="teams-line">${rank.map(r=>`${FLAGS[r.team]||''} ${r.team}`).join(' · ')}</div></div><div class="group-meta">${list.filter(isFinal).length}/${list.length} jugados</div></div><div class="rank"><div class="rank-row header"><span>#</span><span>Equipo</span><span>Pts</span><span>J</span><span>GF</span><span>GC</span><span>DG</span><span></span></div>${rank.map((r,i)=>`<div class="rank-row ${i<2?'advance':i===2?'third':''}"><span>${i+1}</span><span class="rank-team">${FLAGS[r.team]||''} ${r.team}</span><span>${r.pts}</span><span>${r.j}</span><span>${r.gf}</span><span>${r.gc}</span><span>${r.dg}</span><span>${i<2?'↑':i===2?'•':''}</span></div>`).join('')}</div><div class="matches">${list.map(matchCard).join('')}</div></section>`; }).join('') || '<div class="empty">No hay partidos para los filtros seleccionados.</div>'; }
+function renderAll(){ const data=filtered().sort((a,b)=>sourceDateTime(a)-sourceDateTime(b)); const stages=[...new Set(data.map(g=>g.stage))]; $('phaseGrid').innerHTML=stages.map(st=>`<section class="group-card"><div class="group-head"><div><h3>${st}</h3><div class="teams-line">${data.filter(g=>g.stage===st).length} partidos</div></div></div><div class="matches">${data.filter(g=>g.stage===st).map(matchCard).join('')}</div></section>`).join('') || '<div class="empty">No hay partidos para los filtros seleccionados.</div>'; }
 function renderBracket(){ const ko=filtered().filter(g=>g.group==='KO'); const order=['32avos de final','Octavos de final','Cuartos de final','Semifinal','Tercer lugar','Final']; $('bracket').innerHTML=order.map(st=>`<section class="stage-col"><h3>${st}</h3>${ko.filter(g=>g.stage===st).map(g=>`<article class="ko"><div class="ko-id">${g.notes||g.id}</div><div class="ko-team">${FLAGS[g.team1]||''} ${g.team1}</div><div class="ko-team">${FLAGS[g.team2]||''} ${g.team2}</div><div class="ko-meta">${fmtDate(g.date,g.time)}<br>${g.venue}</div></article>`).join('')||'<div class="empty">Pendiente</div>'}</section>`).join(''); }
-function renderMetrics(){ const today='2026-06-18'; $('totalGames').textContent=games.length; $('playedGames').textContent=games.filter(isFinal).length; $('upcomingGames').textContent=games.filter(g=>!isFinal(g)).length; $('todayGames').textContent=games.filter(g=>g.date===today).length; $('koCount').textContent=games.filter(g=>g.group==='KO').length; }
+function renderMetrics(){
+  const today = todayLocalDate();
+  $('totalGames').textContent=games.length;
+  $('playedGames').textContent=games.filter(isFinal).length;
+  $('upcomingGames').textContent=games.filter(g=>!isFinal(g)).length;
+  $('todayGames').textContent=games.filter(g=>localDateKey(sourceDateTime(g))===today).length;
+  $('koCount').textContent=games.filter(g=>g.group==='KO').length;
+  if($('timeZoneLabel')){
+    $('timeZoneLabel').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Local';
+  }
+}
 function render(){ renderMetrics(); renderGroups(); renderAll(); renderBracket(); }
 async function loadData(){ try{ const res=await fetch(DATA_URL + '?v=' + Date.now(), {cache:'no-store'}); if(!res.ok) throw new Error('No se pudo cargar JSON'); const payload=await res.json(); games = Array.isArray(payload) ? payload : payload.games; $('lastUpdated').textContent = payload.updatedAt ? new Date(payload.updatedAt).toLocaleString('es-MX') : new Date().toLocaleString('es-MX'); buildOptions(); render(); } catch(e){ console.error(e); $('lastUpdated').textContent='Sin conexión a datos'; }}
 ['search','stageFilter','statusFilter','hostFilter','groupFilter'].forEach(id=>$(id).addEventListener('input',render));
