@@ -67,7 +67,13 @@ def main():
                 changed += 1
     if changed:
         now = datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat(timespec='seconds')
-        out = {'updatedAt': now, 'timezone': payload.get('timezone','America/Mexico_City') if isinstance(payload,dict) else 'America/Mexico_City', 'refreshHours': 6, 'sourceLabel': 'ESPN public scoreboard', 'games': games}
+        out = {
+            'updatedAt': now,
+            'timezone': payload.get('timezone','America/Mexico_City') if isinstance(payload,dict) else 'America/Mexico_City',
+            'refreshHours': 1,
+            'sourceLabel': 'ESPN public scoreboard',
+            'games': games
+        }
         DATA_FILE.write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding='utf-8')
         print(f'Updated {changed} matches')
     else:
