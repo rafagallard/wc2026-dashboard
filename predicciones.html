@@ -93,7 +93,7 @@
   <section>
     <div class="section-title">
       <h2>Captura de predicciones</h2>
-      <div class="caption">Las predicciones se guardan en Google Sheets para que todos puedan consultar el mismo histórico.</div>
+      <div class="caption">Las predicciones se guardan en Google Sheets. Cada persona puede registrar una sola predicción por partido.</div>
     </div>
     <div class="prediction-layout">
       <section class="card">
@@ -134,8 +134,21 @@
 
   <section>
     <div class="section-title">
+      <h2>Ganadores del día</h2>
+      <div class="caption">Se muestran automáticamente las personas que adivinaron el marcador exacto de partidos que ya tienen resultado final.</div>
+    </div>
+    <section class="card">
+      <div class="card-head"><h3>Aciertos exactos</h3><span id="winnerCount">0 ganador(es)</span></div>
+      <div class="card-body">
+        <div id="winnersTable"></div>
+      </div>
+    </section>
+  </section>
+
+  <section>
+    <div class="section-title">
       <h2>Histórico de predicciones</h2>
-      <div class="caption">Consulta predicciones por día o todos los registros guardados en Google Sheets.</div>
+      <div class="caption">Consulta predicciones por día o todos los registros guardados.</div>
     </div>
     <section class="card">
       <div class="card-body">
@@ -169,8 +182,96 @@ function fmtTime(g){ return g.time || 'Por definir'; }
 function todayGames(){ const today=todayMexicoDate(); return games.filter(g=>g.date===today).sort((a,b)=>(a.time||'').localeCompare(b.time||'')); }
 function groupLabel(g){ if(g.group && g.group !== 'KO') return `Grupo ${g.group}`; return g.stage || 'Partidos'; }
 
+function parseScore(score){
+  const match = String(score || '').match(/(\d+)\s*-\s*(\d+)/);
+  return match ? [Number(match[1]), Number(match[2])] : null;
+}
+
+function isFinalMatch(g){
+  return String(g.status || '').toLowerCase() === 'final' && parseScore(g.score);
+}
+
+function matchById(matchId){
+  return games.find(g => String(g.id) === String(matchId));
+}
+
+function exactWinnerRows(rows){
+  return cleanPredictionRows(rows).filter(r=>{
+    const g = matchById(r.matchId);
+    if(!g || !isFinalMatch(g)) return false;
+    const finalScore = parseScore(g.score);
+    return Number(r.score1) === finalScore[0] && Number(r.score2) === finalScore[1];
+  }).map(r=>{
+    const g = matchById(r.matchId);
+    return {
+      ...r,
+      finalScore: g.score,
+      stage: g.stage || r.stage || '',
+      group: g.group || r.group || '',
+      venue: g.venue || ''
+    };
+  });
+}
+
+function normalizeSheetDate(value){
+  if(!value) return '';
+  const raw = String(value);
+
+  // Google Sheets can return a date as ISO, for example 2026-06-18T06:00:00.000Z.
+  if(/^\d{4}-\d{2}-\d{2}/.test(raw)) return raw.slice(0,10);
+
+  const parsed = new Date(raw);
+  if(!Number.isNaN(parsed.getTime())){
+    return new Intl.DateTimeFormat('en-CA',{
+      timeZone:'America/Mexico_City',
+      year:'numeric',
+      month:'2-digit',
+      day:'2-digit'
+    }).format(parsed);
+  }
+
+  return raw;
+}
+
+function normalizeSheetTime(value){
+  if(!value) return '';
+  const raw = String(value);
+
+  // Keep already clean match times like 10:00, 13:00, Por definir.
+  const direct = raw.match(/^(\d{1,2}:\d{2})(?:\s?.*)?$/);
+  if(direct) return direct[1];
+
+  // Google Sheets can return a time-only value as 1899-12-31T10:36:36.000Z.
+  const parsed = new Date(raw);
+  if(!Number.isNaN(parsed.getTime())){
+    const hours = String(parsed.getUTCHours()).padStart(2,'0');
+    const minutes = String(parsed.getUTCMinutes()).padStart(2,'0');
+    return `${hours}:${minutes}`;
+  }
+
+  return raw;
+}
+
+function formatCapturedAt(value){
+  if(!value) return '';
+  const parsed = new Date(value);
+  if(Number.isNaN(parsed.getTime())) return esc(value);
+  return parsed.toLocaleString('es-MX',{
+    timeZone:'America/Mexico_City',
+    dateStyle:'short',
+    timeStyle:'short'
+  });
+}
+
 function cleanPredictionRows(rows){
-  return (rows||[]).filter(r=>r && r.id && r.id !== 'id' && r.date && r.person && r.matchId);
+  return (rows||[])
+    .filter(r=>r && r.id && r.id !== 'id' && r.date && r.person && r.matchId)
+    .map(r=>({
+      ...r,
+      date: normalizeSheetDate(r.date),
+      time: normalizeSheetTime(r.time),
+      createdAt: r.createdAt ? String(r.createdAt) : ''
+    }));
 }
 
 async function fetchPredictions(date=''){
@@ -223,6 +324,21 @@ function buildMatchSelector(){
 
 function selectedMatch(){ const id=$('matchSelect').value; return todayGames().find(g=>String(g.id)===String(id)); }
 
+function normalizePersonName(name){
+  return String(name || '').trim().replace(/\s+/g,' ').toLowerCase();
+}
+
+function hasDuplicatePrediction(person, matchId, date){
+  const targetName = normalizePersonName(person);
+  const targetMatch = String(matchId);
+  const targetDate = String(date);
+  return allPredictions.some(r =>
+    normalizePersonName(r.person) === targetName &&
+    String(r.matchId) === targetMatch &&
+    String(r.date) === targetDate
+  );
+}
+
 function updateSelectedTeams(){
   const g=selectedMatch();
   $('team1Label').textContent = g ? `${flag(g.team1)} ${g.team1}` : '—';
@@ -239,12 +355,18 @@ async function savePrediction(){
   if(!g){ alert('No hay partido seleccionado.'); return; }
   if(!name){ alert('Captura el nombre de la persona.'); return; }
 
+  const date = todayMexicoDate();
+  if(hasDuplicatePrediction(name, g.id, date)){
+    alert('Esta persona ya registró una predicción para este partido. Si necesita corregirla, primero hay que editarla o eliminarla en Google Sheets.');
+    return;
+  }
+
   const btn=$('savePrediction');
   btn.textContent='Guardando...'; btn.disabled=true;
 
   try{
     await savePredictionToSheet({
-      date:todayMexicoDate(),
+      date:date,
       matchId:g.id,
       time:g.time || '',
       stage:g.stage || '',
@@ -276,7 +398,28 @@ function rowsToTable(rows){
       <td>${flag(r.team1)} ${esc(r.team1)} vs ${esc(r.team2)} ${flag(r.team2)}</td>
       <td>${esc(r.person)}</td>
       <td><strong>${Number(r.score1)} - ${Number(r.score2)}</strong></td>
-      <td>${r.createdAt ? new Date(r.createdAt).toLocaleString('es-MX') : ''}</td>
+      <td>${formatCapturedAt(r.createdAt)}</td>
+    </tr>`).join('')}</tbody>
+  </table></div>`;
+}
+
+function winnersToTable(rows){
+  rows = exactWinnerRows(rows);
+  $('winnerCount').textContent = `${rows.length} ganador(es)`;
+
+  if(!rows.length){
+    return '<div class="empty">Todavía no hay ganadores con marcador exacto para partidos finalizados.</div>';
+  }
+
+  return `<div class="table-wrap"><table>
+    <thead><tr><th>Fecha</th><th>Partido</th><th>Resultado final</th><th>Ganador</th><th>Predicción</th><th>Capturado</th></tr></thead>
+    <tbody>${rows.map(r=>`<tr>
+      <td>${esc(r.date)}</td>
+      <td>${flag(r.team1)} ${esc(r.team1)} vs ${esc(r.team2)} ${flag(r.team2)}</td>
+      <td><strong>${esc(r.finalScore)}</strong></td>
+      <td><strong>${esc(r.person)}</strong></td>
+      <td>${Number(r.score1)} - ${Number(r.score2)}</td>
+      <td>${formatCapturedAt(r.createdAt)}</td>
     </tr>`).join('')}</tbody>
   </table></div>`;
 }
@@ -286,6 +429,12 @@ function renderTodayPredictions(){
   const rows=allPredictions.filter(r=>String(r.date)===String(today));
   $('todayPredictionCount').textContent = `${rows.length} registro(s)`;
   $('todayPredictions').innerHTML = rowsToTable(rows);
+}
+
+function renderWinners(){
+  const today=todayMexicoDate();
+  const rows=allPredictions.filter(r=>String(r.date)===String(today));
+  $('winnersTable').innerHTML = winnersToTable(rows);
 }
 
 function buildHistorySelector(){
@@ -302,8 +451,10 @@ function renderAllHistory(){ $('historyTable').innerHTML = rowsToTable(allPredic
 
 async function refreshPredictions(){
   $('todayPredictions').innerHTML = '<div class="empty">Cargando predicciones...</div>';
+  $('winnersTable').innerHTML = '<div class="empty">Calculando ganadores...</div>';
   allPredictions = await fetchPredictions('');
   renderTodayPredictions();
+  renderWinners();
   buildHistorySelector();
   renderSelectedHistory();
 }
