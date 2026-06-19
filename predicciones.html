@@ -75,7 +75,7 @@
     </div>
     <div class="statusbar">
       <a class="nav-link" href="index.html">← Volver al dashboard</a>
-      <div class="pill">Día: <span id="todayLabel">—</span></div>
+      <div class="pill">Día local: <span id="todayLabel">—</span></div><div class="pill">Zona: <span id="timeZoneLabel">Local</span></div>
       <div class="pill">Datos: <span id="lastUpdated">—</span></div>
     </div>
   </div>
@@ -173,13 +173,28 @@ let games = [];
 let allPredictions = [];
 const $ = id => document.getElementById(id);
 
-function todayMexicoDate(){ return new Intl.DateTimeFormat('en-CA',{timeZone:'America/Mexico_City',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()); }
+function sourceDateTime(g){
+  // Match schedule in the JSON is treated as Mexico City time.
+  // Mexico City is UTC-06:00 for the tournament period.
+  const time = g.time || '00:00';
+  return new Date(`${g.date}T${time}:00-06:00`);
+}
+function localDateKey(date){
+  return new Intl.DateTimeFormat('en-CA',{year:'numeric',month:'2-digit',day:'2-digit'}).format(date);
+}
+function todayLocalDate(){ return localDateKey(new Date()); }
 function flag(team){ return FLAGS[team] || '🏳️'; }
 function esc(s){ return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 function normStatus(s){ return (s||'Por definir').replaceAll(' ','-'); }
 function fmtDate(date){ return new Date(date+'T12:00:00').toLocaleDateString('es-MX',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}); }
-function fmtTime(g){ return g.time || 'Por definir'; }
-function todayGames(){ const today=todayMexicoDate(); return games.filter(g=>g.date===today).sort((a,b)=>(a.time||'').localeCompare(b.time||'')); }
+function fmtTime(g){
+  if(!g.time) return 'Por definir';
+  return sourceDateTime(g).toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'});
+}
+function todayGames(){
+  const today=todayLocalDate();
+  return games.filter(g=>localDateKey(sourceDateTime(g))===today).sort((a,b)=>sourceDateTime(a)-sourceDateTime(b));
+}
 function groupLabel(g){ if(g.group && g.group !== 'KO') return `Grupo ${g.group}`; return g.stage || 'Partidos'; }
 
 function parseScore(score){
@@ -298,7 +313,8 @@ function renderTodayMatches(){
   const list = todayGames();
   const grouped = {};
   list.forEach(g=>{ const key=groupLabel(g); if(!grouped[key]) grouped[key]=[]; grouped[key].push(g); });
-  $('todayLabel').textContent = fmtDate(todayMexicoDate());
+  $('todayLabel').textContent = fmtDate(todayLocalDate());
+  if($('timeZoneLabel')) $('timeZoneLabel').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Local';
   $('todayMatchesByGroup').innerHTML = Object.keys(grouped).sort().map(group=>`
     <section class="card">
       <div class="card-head"><h3>${esc(group)}</h3><span>${grouped[group].length} partido(s)</span></div>
@@ -355,7 +371,7 @@ async function savePrediction(){
   if(!g){ alert('No hay partido seleccionado.'); return; }
   if(!name){ alert('Captura el nombre de la persona.'); return; }
 
-  const date = todayMexicoDate();
+  const date = todayLocalDate();
   if(hasDuplicatePrediction(name, g.id, date)){
     alert('Esta persona ya registró una predicción para este partido. Si necesita corregirla, primero hay que editarla o eliminarla en Google Sheets.');
     return;
@@ -425,14 +441,14 @@ function winnersToTable(rows){
 }
 
 function renderTodayPredictions(){
-  const today=todayMexicoDate();
+  const today=todayLocalDate();
   const rows=allPredictions.filter(r=>String(r.date)===String(today));
   $('todayPredictionCount').textContent = `${rows.length} registro(s)`;
   $('todayPredictions').innerHTML = rowsToTable(rows);
 }
 
 function renderWinners(){
-  const today=todayMexicoDate();
+  const today=todayLocalDate();
   const rows=allPredictions.filter(r=>String(r.date)===String(today));
   $('winnersTable').innerHTML = winnersToTable(rows);
 }
