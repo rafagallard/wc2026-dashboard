@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-20T05:11:07+00:00",
+  "updatedAt": "2026-06-20T17:24:06+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -459,9 +459,9 @@
       "stage": "Fase de grupos",
       "group": "F",
       "team1": "Países Bajos",
-      "score": "",
+      "score": "2 - 0",
       "team2": "Suecia",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "NRG Stadium / Houston Stadium, Houston, Estados Unidos",
       "notes": "Grupo F · FIFA automatic update"
