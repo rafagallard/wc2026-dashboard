@@ -62,6 +62,7 @@
     .empty{background:#fff;border:1px dashed var(--line);border-radius:24px;padding:26px;color:var(--muted);text-align:center}
     .footer{padding:24px;color:var(--muted);font-size:12px;text-align:center}
     .loading{opacity:.7;pointer-events:none}
+    .closed-note{margin-top:10px;font-size:12px;font-weight:850;color:#991b1b;background:#fee2e2;border:1px solid #fecaca;border-radius:14px;padding:9px 10px}
     @media(max-width:1120px){.hero{grid-template-columns:1fr}.statusbar{justify-content:flex-start}.grid,.prediction-layout{grid-template-columns:1fr}.day-grid{grid-template-columns:1fr}}
     @media(max-width:640px){main{padding:12px}.scoreline{grid-template-columns:1fr;gap:6px}.right{text-align:left}.score{width:max-content}.score-pickers{grid-template-columns:1fr 1fr}.flag-team{grid-column:span 2}.actions button{width:100%}.card{border-radius:22px}.card-head{display:block}.section-title{display:block}.caption{margin-top:6px}}
   </style>
@@ -331,10 +332,45 @@ function matchCard(g){
   </article>`;
 }
 
+function isClosedByStatus(g){
+  return ['final','en vivo','en-vivo'].includes(String(g?.status || '').trim().toLowerCase());
+}
+
+function hasMatchStarted(g){
+  if(!g || !g.date || !g.time) return false;
+  return new Date() >= sourceDateTime(g);
+}
+
+function predictionClosedReason(g){
+  if(!g) return 'No hay partido seleccionado.';
+  if(String(g.status || '').trim().toLowerCase() === 'final') return 'Predicción cerrada: el partido ya finalizó.';
+  if(['en vivo','en-vivo'].includes(String(g.status || '').trim().toLowerCase())) return 'Predicción cerrada: el partido ya está en vivo.';
+  if(hasMatchStarted(g)) return 'Predicción cerrada: el partido ya empezó por horario.';
+  return '';
+}
+
+function canPredictMatch(g){
+  return !predictionClosedReason(g);
+}
+
 function buildMatchSelector(){
   const list=todayGames();
-  $('formMatchCount').textContent = `${list.length} partido(s)`;
-  $('matchSelect').innerHTML = list.map(g=>`<option value="${esc(g.id)}">${fmtTime(g)} · ${esc(g.team1)} vs ${esc(g.team2)}</option>`).join('');
+  const openCount=list.filter(canPredictMatch).length;
+  $('formMatchCount').textContent = `${openCount} abierto(s) / ${list.length} partido(s)`;
+
+  if(!list.length){
+    $('matchSelect').innerHTML = '<option value="">No hay partidos programados para hoy</option>';
+  }else{
+    $('matchSelect').innerHTML = list.map(g=>{
+      const closed = !canPredictMatch(g);
+      const label = `${fmtTime(g)} · ${g.team1} vs ${g.team2}${closed ? ' · Cerrado' : ''}`;
+      return `<option value="${esc(g.id)}" ${closed ? 'disabled' : ''}>${esc(label)}</option>`;
+    }).join('');
+
+    const firstOpen = list.find(canPredictMatch);
+    if(firstOpen) $('matchSelect').value = firstOpen.id;
+  }
+
   updateSelectedTeams();
 }
 
@@ -344,25 +380,46 @@ function normalizePersonName(name){
   return String(name || '').trim().replace(/\s+/g,' ').toLowerCase();
 }
 
-function hasDuplicatePrediction(person, matchId, date){
+function hasDuplicatePrediction(person, matchId){
   const targetName = normalizePersonName(person);
   const targetMatch = String(matchId);
-  const targetDate = String(date);
+  if(!targetName || !targetMatch) return false;
   return allPredictions.some(r =>
     normalizePersonName(r.person) === targetName &&
-    String(r.matchId) === targetMatch &&
-    String(r.date) === targetDate
+    String(r.matchId) === targetMatch
   );
 }
 
 function updateSelectedTeams(){
   const g=selectedMatch();
+  const name=$('personName').value.trim();
+  const reason=predictionClosedReason(g);
+  const duplicate=g && name && hasDuplicatePrediction(name, g.id);
+  const blocked = !g || Boolean(reason) || Boolean(duplicate);
+
   $('team1Label').textContent = g ? `${flag(g.team1)} ${g.team1}` : '—';
   $('team2Label').textContent = g ? `${g.team2} ${flag(g.team2)}` : '—';
+  $('score1').disabled = blocked;
+  $('score2').disabled = blocked;
+  $('savePrediction').disabled = blocked;
+
+  let message = '';
+  if(reason) message = reason;
+  else if(duplicate) message = 'Predicción bloqueada: esta persona ya registró un resultado para este partido.';
+
+  const existing=$('predictionBlockMessage');
+  if(existing) existing.remove();
+  if(message){
+    const div=document.createElement('div');
+    div.id='predictionBlockMessage';
+    div.className='closed-note';
+    div.textContent=message;
+    document.querySelector('.score-pickers').insertAdjacentElement('afterend', div);
+  }
 }
 
 function clampScoreInput(input){ let value=Number(input.value); if(Number.isNaN(value)) value=0; input.value=Math.max(0,Math.min(10,Math.round(value))); }
-function clearForm(){ $('personName').value=''; $('score1').value=0; $('score2').value=0; }
+function clearForm(){ $('personName').value=''; $('score1').value=0; $('score2').value=0; updateSelectedTeams(); }
 
 async function savePrediction(){
   const g=selectedMatch();
@@ -371,19 +428,42 @@ async function savePrediction(){
   if(!g){ alert('No hay partido seleccionado.'); return; }
   if(!name){ alert('Captura el nombre de la persona.'); return; }
 
-  const date = todayLocalDate();
-  if(hasDuplicatePrediction(name, g.id, date)){
-    alert('Esta persona ya registró una predicción para este partido. Si necesita corregirla, primero hay que editarla o eliminarla en Google Sheets.');
+  const closedReason = predictionClosedReason(g);
+  if(closedReason){
+    alert(closedReason);
+    updateSelectedTeams();
     return;
   }
 
+  if(hasDuplicatePrediction(name, g.id)){
+    alert('Esta persona ya registró una predicción para este partido. No se permite más de un resultado por persona en el mismo partido.');
+    updateSelectedTeams();
+    return;
+  }
+
+  const date = todayLocalDate();
   const btn=$('savePrediction');
   btn.textContent='Guardando...'; btn.disabled=true;
 
   try{
+    await refreshPredictions();
+
+    if(hasDuplicatePrediction(name, g.id)){
+      alert('Esta persona ya registró una predicción para este partido. No se permite más de un resultado por persona en el mismo partido.');
+      updateSelectedTeams();
+      return;
+    }
+
+    if(predictionClosedReason(g)){
+      alert(predictionClosedReason(g));
+      updateSelectedTeams();
+      return;
+    }
+
     await savePredictionToSheet({
       date:date,
       matchId:g.id,
+      matchStartAt:sourceDateTime(g).toISOString(),
       time:g.time || '',
       stage:g.stage || '',
       group:g.group || '',
@@ -399,7 +479,8 @@ async function savePrediction(){
     console.error(e);
     alert('No se pudo guardar la predicción: ' + e.message);
   }finally{
-    btn.textContent='Guardar predicción'; btn.disabled=false;
+    btn.textContent='Guardar predicción';
+    updateSelectedTeams();
   }
 }
 
@@ -473,6 +554,7 @@ async function refreshPredictions(){
   renderWinners();
   buildHistorySelector();
   renderSelectedHistory();
+  updateSelectedTeams();
 }
 
 async function loadData(){
@@ -493,6 +575,7 @@ async function loadData(){
 }
 
 $('matchSelect').addEventListener('change',updateSelectedTeams);
+$('personName').addEventListener('input',updateSelectedTeams);
 $('score1').addEventListener('change',()=>clampScoreInput($('score1')));
 $('score2').addEventListener('change',()=>clampScoreInput($('score2')));
 $('savePrediction').addEventListener('click',savePrediction);
