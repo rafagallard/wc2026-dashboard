@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-20T19:21:55+00:00",
+  "updatedAt": "2026-06-20T21:15:14+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -473,12 +473,12 @@
       "stage": "Fase de grupos",
       "group": "E",
       "team1": "Alemania",
-      "score": "",
+      "score": "0 - 1",
       "team2": "Costa de Marfil",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Canadá",
       "venue": "BMO Field / Toronto Stadium, Toronto, Canadá",
-      "notes": "Grupo E"
+      "notes": "Grupo E · ESPN automatic update"
     },
     {
       "id": "66457076",
