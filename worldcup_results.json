@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T20:23:11+00:00",
+  "updatedAt": "2026-06-21T22:12:26+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -531,7 +531,7 @@
       "team1": "Bélgica",
       "score": "0 - 0",
       "team2": "Irán",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "SoFi Stadium / Los Angeles Stadium, Los Ángeles, Estados Unidos",
       "notes": "Grupo G · ESPN automatic update"
@@ -543,9 +543,9 @@
       "stage": "Fase de grupos",
       "group": "H",
       "team1": "Uruguay",
-      "score": "",
+      "score": "0 - 0",
       "team2": "Cabo Verde",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
       "notes": "Grupo H · FIFA automatic update"
