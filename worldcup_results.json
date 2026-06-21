@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T03:55:26+00:00",
+  "updatedAt": "2026-06-21T08:28:41+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -501,12 +501,12 @@
       "stage": "Fase de grupos",
       "group": "F",
       "team1": "Túnez",
-      "score": "",
+      "score": "0 - 4",
       "team2": "Japón",
-      "status": "En vivo",
+      "status": "Final",
       "host": "México",
       "venue": "Estadio BBVA / Estadio Monterrey, Monterrey, México",
-      "notes": "Grupo F · FIFA automatic update"
+      "notes": "Grupo F · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66456998",
