@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T08:28:41+00:00",
+  "updatedAt": "2026-06-21T16:28:52+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -515,9 +515,9 @@
       "stage": "Fase de grupos",
       "group": "H",
       "team1": "España",
-      "score": "",
+      "score": "3 - 0",
       "team2": "Arabia Saudita",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Mercedes-Benz Stadium / Atlanta Stadium, Atlanta, Estados Unidos",
       "notes": "Grupo H · FIFA automatic update"
