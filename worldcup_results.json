@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-22T06:27:06+00:00",
+  "updatedAt": "2026-06-22T17:38:44+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -571,9 +571,9 @@
       "stage": "Fase de grupos",
       "group": "J",
       "team1": "Argentina",
-      "score": "",
+      "score": "0 - 0",
       "team2": "Austria",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
       "notes": "Grupo J · FIFA automatic update"
