@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-22T20:43:37+00:00",
+  "updatedAt": "2026-06-22T22:45:23+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -585,7 +585,7 @@
       "stage": "Fase de grupos",
       "group": "I",
       "team1": "Francia",
-      "score": "",
+      "score": "1 - 0",
       "team2": "Irak",
       "status": "En vivo",
       "host": "Estados Unidos",
