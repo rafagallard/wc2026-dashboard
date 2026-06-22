@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T22:12:26+00:00",
+  "updatedAt": "2026-06-22T00:09:21+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -543,12 +543,12 @@
       "stage": "Fase de grupos",
       "group": "H",
       "team1": "Uruguay",
-      "score": "0 - 0",
+      "score": "2 - 2",
       "team2": "Cabo Verde",
       "status": "Final",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
-      "notes": "Grupo H · FIFA automatic update"
+      "notes": "Grupo H · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66456988",
