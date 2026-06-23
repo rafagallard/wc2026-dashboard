@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-23T00:03:26+00:00",
+  "updatedAt": "2026-06-23T04:58:07+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -585,12 +585,12 @@
       "stage": "Fase de grupos",
       "group": "I",
       "team1": "Francia",
-      "score": "1 - 0",
+      "score": "3 - 0",
       "team2": "Irak",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Lincoln Financial Field / Philadelphia Stadium, Filadelfia, Estados Unidos",
-      "notes": "Grupo I · FIFA automatic update"
+      "notes": "Grupo I · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66457012",
@@ -599,12 +599,12 @@
       "stage": "Fase de grupos",
       "group": "I",
       "team1": "Noruega",
-      "score": "0 - 0",
+      "score": "3 - 2",
       "team2": "Senegal",
       "status": "Final",
       "host": "Estados Unidos",
       "venue": "MetLife Stadium / New York New Jersey Stadium, East Rutherford, Estados Unidos",
-      "notes": "Grupo I · FIFA automatic update"
+      "notes": "Grupo I · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66457024",
@@ -613,9 +613,9 @@
       "stage": "Fase de grupos",
       "group": "J",
       "team1": "Jordania",
-      "score": "",
+      "score": "1 - 2",
       "team2": "Argelia",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Levi’s Stadium / San Francisco Bay Area Stadium, Santa Clara, Estados Unidos",
       "notes": "Grupo J · FIFA automatic update"
