@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-23T19:59:14+00:00",
+  "updatedAt": "2026-06-23T21:47:19+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -641,9 +641,9 @@
       "stage": "Fase de grupos",
       "group": "L",
       "team1": "Inglaterra",
-      "score": "",
+      "score": "0 - 0",
       "team2": "Ghana",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Gillette Stadium / Boston Stadium, Foxborough, Estados Unidos",
       "notes": "Grupo L · FIFA automatic update"
