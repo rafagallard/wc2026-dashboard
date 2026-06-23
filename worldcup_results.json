@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-22T22:45:23+00:00",
+  "updatedAt": "2026-06-23T00:03:26+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -599,9 +599,9 @@
       "stage": "Fase de grupos",
       "group": "I",
       "team1": "Noruega",
-      "score": "",
+      "score": "0 - 0",
       "team2": "Senegal",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "MetLife Stadium / New York New Jersey Stadium, East Rutherford, Estados Unidos",
       "notes": "Grupo I · FIFA automatic update"
