@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-24T20:46:47+00:00",
+  "updatedAt": "2026-06-24T22:14:45+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -711,9 +711,9 @@
       "stage": "Fase de grupos",
       "group": "C",
       "team1": "Escocia",
-      "score": "",
+      "score": "0 - 1",
       "team2": "Brasil",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
       "notes": "Grupo C · FIFA automatic update"
@@ -725,9 +725,9 @@
       "stage": "Fase de grupos",
       "group": "C",
       "team1": "Marruecos",
-      "score": "",
+      "score": "0 - 1",
       "team2": "Haití",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Mercedes-Benz Stadium / Atlanta Stadium, Atlanta, Estados Unidos",
       "notes": "Grupo C · FIFA automatic update"
