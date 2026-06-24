@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-24T06:50:45+00:00",
+  "updatedAt": "2026-06-24T20:46:47+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -683,9 +683,9 @@
       "stage": "Fase de grupos",
       "group": "B",
       "team1": "Suiza",
-      "score": "",
+      "score": "2 - 1",
       "team2": "Canadá",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Canadá",
       "venue": "BC Place / Vancouver Stadium, Vancouver, Canadá",
       "notes": "Grupo B · FIFA automatic update"
@@ -697,9 +697,9 @@
       "stage": "Fase de grupos",
       "group": "B",
       "team1": "Bosnia y Herzegovina",
-      "score": "",
+      "score": "3 - 1",
       "team2": "Qatar",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Lumen Field / Seattle Stadium, Seattle, Estados Unidos",
       "notes": "Grupo B · FIFA automatic update"
