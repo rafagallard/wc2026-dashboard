@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-24T02:56:54+00:00",
+  "updatedAt": "2026-06-24T06:50:45+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -669,12 +669,12 @@
       "stage": "Fase de grupos",
       "group": "K",
       "team1": "Colombia",
-      "score": "0 - 0",
+      "score": "1 - 0",
       "team2": "RD Congo",
       "status": "Final",
       "host": "México",
       "venue": "Estadio Akron / Estadio Guadalajara, Guadalajara/Zapopan, México",
-      "notes": "Grupo K · FIFA automatic update"
+      "notes": "Grupo K · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66456924",
