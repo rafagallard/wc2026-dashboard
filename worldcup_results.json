@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-23T23:07:18+00:00",
+  "updatedAt": "2026-06-24T02:56:54+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -655,12 +655,12 @@
       "stage": "Fase de grupos",
       "group": "L",
       "team1": "Panamá",
-      "score": "0 - 0",
+      "score": "0 - 1",
       "team2": "Croacia",
       "status": "Final",
       "host": "Canadá",
       "venue": "BMO Field / Toronto Stadium, Toronto, Canadá",
-      "notes": "Grupo L · FIFA automatic update"
+      "notes": "Grupo L · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66457036",
@@ -669,9 +669,9 @@
       "stage": "Fase de grupos",
       "group": "K",
       "team1": "Colombia",
-      "score": "",
+      "score": "0 - 0",
       "team2": "RD Congo",
-      "status": "En vivo",
+      "status": "Final",
       "host": "México",
       "venue": "Estadio Akron / Estadio Guadalajara, Guadalajara/Zapopan, México",
       "notes": "Grupo K · FIFA automatic update"
