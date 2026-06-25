@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-25T21:43:08+00:00",
+  "updatedAt": "2026-06-25T23:15:51+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -783,7 +783,7 @@
       "team1": "Curazao",
       "score": "0 - 2",
       "team2": "Costa de Marfil",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Lincoln Financial Field / Philadelphia Stadium, Filadelfia, Estados Unidos",
       "notes": "Grupo E · ESPN automatic update"
@@ -795,9 +795,9 @@
       "stage": "Fase de grupos",
       "group": "F",
       "team1": "Túnez",
-      "score": "",
+      "score": "0 - 2",
       "team2": "Países Bajos",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Arrowhead Stadium / Kansas City Stadium, Kansas City, Estados Unidos",
       "notes": "Grupo F · FIFA automatic update"
@@ -809,9 +809,9 @@
       "stage": "Fase de grupos",
       "group": "F",
       "team1": "Japón",
-      "score": "",
+      "score": "0 - 0",
       "team2": "Suecia",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
       "notes": "Grupo F · FIFA automatic update"
