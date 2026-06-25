@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-25T05:02:55+00:00",
+  "updatedAt": "2026-06-25T21:43:08+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -767,9 +767,9 @@
       "stage": "Fase de grupos",
       "group": "E",
       "team1": "Ecuador",
-      "score": "",
+      "score": "2 - 1",
       "team2": "Alemania",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "MetLife Stadium / New York New Jersey Stadium, East Rutherford, Estados Unidos",
       "notes": "Grupo E · FIFA automatic update"
@@ -781,12 +781,12 @@
       "stage": "Fase de grupos",
       "group": "E",
       "team1": "Curazao",
-      "score": "",
+      "score": "0 - 2",
       "team2": "Costa de Marfil",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Lincoln Financial Field / Philadelphia Stadium, Filadelfia, Estados Unidos",
-      "notes": "Grupo E"
+      "notes": "Grupo E · ESPN automatic update"
     },
     {
       "id": "66456976",
