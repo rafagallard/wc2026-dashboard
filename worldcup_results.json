@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-26T07:49:24+00:00",
+  "updatedAt": "2026-06-26T18:50:08+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -867,7 +867,7 @@
       "team1": "Senegal",
       "score": "",
       "team2": "Irak",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Canadá",
       "venue": "BMO Field / Toronto Stadium, Toronto, Canadá",
       "notes": "Grupo I · FIFA automatic update"
