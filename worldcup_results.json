@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-26T20:45:14+00:00",
+  "updatedAt": "2026-06-26T22:10:44+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -851,12 +851,12 @@
       "stage": "Fase de grupos",
       "group": "I",
       "team1": "Noruega",
-      "score": "1 - 3",
+      "score": "1 - 4",
       "team2": "Francia",
       "status": "Final",
       "host": "Estados Unidos",
       "venue": "Gillette Stadium / Boston Stadium, Foxborough, Estados Unidos",
-      "notes": "Grupo I · FIFA automatic update"
+      "notes": "Grupo I · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66457016",
@@ -865,12 +865,12 @@
       "stage": "Fase de grupos",
       "group": "I",
       "team1": "Senegal",
-      "score": "4 - 0",
+      "score": "5 - 0",
       "team2": "Irak",
       "status": "Final",
       "host": "Canadá",
       "venue": "BMO Field / Toronto Stadium, Toronto, Canadá",
-      "notes": "Grupo I · FIFA automatic update"
+      "notes": "Grupo I · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66457002",
