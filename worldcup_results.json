@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-26T03:26:30+00:00",
+  "updatedAt": "2026-06-26T07:49:24+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -823,12 +823,12 @@
       "stage": "Fase de grupos",
       "group": "D",
       "team1": "Turquía",
-      "score": "2 - 2",
+      "score": "3 - 2",
       "team2": "Estados Unidos",
       "status": "Final",
       "host": "Estados Unidos",
       "venue": "SoFi Stadium / Los Angeles Stadium, Los Ángeles, Estados Unidos",
-      "notes": "Grupo D · FIFA automatic update"
+      "notes": "Grupo D · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66456950",
