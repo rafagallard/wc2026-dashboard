@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-25T23:15:51+00:00",
+  "updatedAt": "2026-06-26T03:26:30+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -795,12 +795,12 @@
       "stage": "Fase de grupos",
       "group": "F",
       "team1": "Túnez",
-      "score": "0 - 2",
+      "score": "1 - 3",
       "team2": "Países Bajos",
       "status": "Final",
       "host": "Estados Unidos",
       "venue": "Arrowhead Stadium / Kansas City Stadium, Kansas City, Estados Unidos",
-      "notes": "Grupo F · FIFA automatic update"
+      "notes": "Grupo F · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66456978",
@@ -809,12 +809,12 @@
       "stage": "Fase de grupos",
       "group": "F",
       "team1": "Japón",
-      "score": "0 - 0",
+      "score": "1 - 1",
       "team2": "Suecia",
       "status": "Final",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
-      "notes": "Grupo F · FIFA automatic update"
+      "notes": "Grupo F · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66456948",
@@ -823,9 +823,9 @@
       "stage": "Fase de grupos",
       "group": "D",
       "team1": "Turquía",
-      "score": "",
+      "score": "2 - 2",
       "team2": "Estados Unidos",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "SoFi Stadium / Los Angeles Stadium, Los Ángeles, Estados Unidos",
       "notes": "Grupo D · FIFA automatic update"
@@ -837,9 +837,9 @@
       "stage": "Fase de grupos",
       "group": "D",
       "team1": "Paraguay",
-      "score": "",
+      "score": "0 - 0",
       "team2": "Australia",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Levi’s Stadium / San Francisco Bay Area Stadium, Santa Clara, Estados Unidos",
       "notes": "Grupo D · FIFA automatic update"
