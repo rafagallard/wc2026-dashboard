@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-27T04:51:28+00:00",
+  "updatedAt": "2026-06-27T07:47:28+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -907,12 +907,12 @@
       "stage": "Fase de grupos",
       "group": "G",
       "team1": "Nueva Zelanda",
-      "score": "1 - 4",
+      "score": "1 - 5",
       "team2": "Bélgica",
       "status": "Final",
       "host": "Canadá",
       "venue": "BC Place / Vancouver Stadium, Vancouver, Canadá",
-      "notes": "Grupo G · FIFA automatic update"
+      "notes": "Grupo G · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66456992",
@@ -923,7 +923,7 @@
       "team1": "Egipto",
       "score": "1 - 1",
       "team2": "Irán",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Lumen Field / Seattle Stadium, Seattle, Estados Unidos",
       "notes": "Grupo G · ESPN automatic update"
