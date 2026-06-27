@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-27T00:04:23+00:00",
+  "updatedAt": "2026-06-27T04:51:28+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -879,12 +879,12 @@
       "stage": "Fase de grupos",
       "group": "H",
       "team1": "Uruguay",
-      "score": "0 - 0",
+      "score": "0 - 1",
       "team2": "España",
       "status": "Final",
       "host": "México",
       "venue": "Estadio Akron / Estadio Guadalajara, Guadalajara/Zapopan, México",
-      "notes": "Grupo H · FIFA automatic update"
+      "notes": "Grupo H · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66457004",
@@ -907,9 +907,9 @@
       "stage": "Fase de grupos",
       "group": "G",
       "team1": "Nueva Zelanda",
-      "score": "",
+      "score": "1 - 4",
       "team2": "Bélgica",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Canadá",
       "venue": "BC Place / Vancouver Stadium, Vancouver, Canadá",
       "notes": "Grupo G · FIFA automatic update"
@@ -921,12 +921,12 @@
       "stage": "Fase de grupos",
       "group": "G",
       "team1": "Egipto",
-      "score": "",
+      "score": "1 - 1",
       "team2": "Irán",
-      "status": "Programado",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Lumen Field / Seattle Stadium, Seattle, Estados Unidos",
-      "notes": "Grupo G"
+      "notes": "Grupo G · ESPN automatic update"
     },
     {
       "id": "66457050",
