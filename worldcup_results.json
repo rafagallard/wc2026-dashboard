@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-27T07:47:28+00:00",
+  "updatedAt": "2026-06-27T22:00:31+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -935,9 +935,9 @@
       "stage": "Fase de grupos",
       "group": "L",
       "team1": "Panamá",
-      "score": "",
+      "score": "0 - 0",
       "team2": "Inglaterra",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "MetLife Stadium / New York New Jersey Stadium, East Rutherford, Estados Unidos",
       "notes": "Grupo L · FIFA automatic update"
@@ -949,9 +949,9 @@
       "stage": "Fase de grupos",
       "group": "L",
       "team1": "Croacia",
-      "score": "",
+      "score": "1 - 0",
       "team2": "Ghana",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Lincoln Financial Field / Philadelphia Stadium, Filadelfia, Estados Unidos",
       "notes": "Grupo L · FIFA automatic update"
