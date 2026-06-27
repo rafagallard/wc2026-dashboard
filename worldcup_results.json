@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-26T22:10:44+00:00",
+  "updatedAt": "2026-06-27T00:04:23+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -879,9 +879,9 @@
       "stage": "Fase de grupos",
       "group": "H",
       "team1": "Uruguay",
-      "score": "",
+      "score": "0 - 0",
       "team2": "España",
-      "status": "En vivo",
+      "status": "Final",
       "host": "México",
       "venue": "Estadio Akron / Estadio Guadalajara, Guadalajara/Zapopan, México",
       "notes": "Grupo H · FIFA automatic update"
@@ -893,9 +893,9 @@
       "stage": "Fase de grupos",
       "group": "H",
       "team1": "Cabo Verde",
-      "score": "",
+      "score": "0 - 0",
       "team2": "Arabia Saudita",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "NRG Stadium / Houston Stadium, Houston, Estados Unidos",
       "notes": "Grupo H · FIFA automatic update"
