@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-27T23:59:45+00:00",
+  "updatedAt": "2026-06-28T04:44:09+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -977,12 +977,12 @@
       "stage": "Fase de grupos",
       "group": "K",
       "team1": "RD Congo",
-      "score": "0 - 1",
+      "score": "3 - 1",
       "team2": "Uzbekistán",
       "status": "Final",
       "host": "Estados Unidos",
       "venue": "Mercedes-Benz Stadium / Atlanta Stadium, Atlanta, Estados Unidos",
-      "notes": "Grupo K · FIFA automatic update"
+      "notes": "Grupo K · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66457026",
@@ -991,12 +991,12 @@
       "stage": "Fase de grupos",
       "group": "J",
       "team1": "Jordania",
-      "score": "",
+      "score": "1 - 3",
       "team2": "Argentina",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
-      "notes": "Grupo J · FIFA automatic update"
+      "notes": "Grupo J · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "66457028",
@@ -1005,12 +1005,12 @@
       "stage": "Fase de grupos",
       "group": "J",
       "team1": "Argelia",
-      "score": "",
+      "score": "3 - 3",
       "team2": "Austria",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Arrowhead Stadium / Kansas City Stadium, Kansas City, Estados Unidos",
-      "notes": "Grupo J · FIFA automatic update"
+      "notes": "Grupo J · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "P73",
