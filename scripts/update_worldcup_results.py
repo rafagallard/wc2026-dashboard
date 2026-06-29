@@ -1,23 +1,25 @@
 #!/usr/bin/env python3
-"""Fully automated World Cup dashboard results updater.
+"""Actualiza automáticamente worldcup_results.json para el dashboard.
 
-Sources:
-1. FIFA official calendar matches API as primary source.
-2. ESPN public scoreboard as fallback source.
+Fuentes usadas:
+1. FIFA official matches API.
+2. ESPN public scoreboard como respaldo.
 
-This version is more tolerant with FIFA's JSON structure:
-- It searches team names, scores and status in common and nested fields.
-- It logs how many FIFA/ESPN updates were found and matched.
-- It does not use manual overrides.
+Notas de mantenimiento:
+- Los partidos de fase de grupos se empatan por id, fecha y equipos.
+- Los partidos eliminatorios también se empatan por fecha/hora porque el JSON local usa ids internos
+  como P73, P74, etc., mientras las fuentes públicas usan ids distintos.
+- Cuando un partido eliminatorio ya tiene equipos reales en la fuente, se reemplazan los placeholders
+  como "2º Grupo A" o "Ganador P73" por el nombre real del equipo.
 """
 
+import datetime
 import json
 import os
 import re
 import sys
 import time
 import urllib.request
-import datetime
 from pathlib import Path
 
 DATA_FILE = Path("worldcup_results.json")
@@ -61,42 +63,55 @@ ALIASES = {
 
 
 def now_iso():
+    """Devuelve la fecha/hora actual en formato ISO para registrar la actualización."""
     return datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat(timespec="seconds")
 
 
 def load_json_url(url):
+    """Descarga JSON desde una URL con un User-Agent válido para evitar bloqueos simples."""
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=35) as response:
         return json.loads(response.read().decode("utf-8"))
 
 
 def normalize_text(value):
+    """Normaliza texto para comparar nombres de equipos y estados sin depender de mayúsculas o signos."""
     value = str(value or "").strip().lower().replace("’", "'")
     value = re.sub(r"[^a-z0-9áéíóúüñç' ]+", " ", value, flags=re.IGNORECASE)
     return re.sub(r"\s+", " ", value).strip()
 
 
 def ascii_fold(value):
+    """Remueve acentos comunes para comparar aliases en inglés y español."""
     return (value.replace("á", "a").replace("é", "e").replace("í", "i")
                  .replace("ó", "o").replace("ú", "u").replace("ü", "u")
                  .replace("ñ", "n"))
 
 
 def team_key(value):
+    """Convierte un nombre de equipo a la versión canónica usada por el dashboard."""
     cleaned = normalize_text(value)
     folded = ascii_fold(cleaned)
     return ALIASES.get(cleaned) or ALIASES.get(folded) or str(value or "")
 
 
 def pair_key(team1, team2):
+    """Crea una llave estable para comparar dos equipos sin importar el orden."""
     return tuple(sorted([team_key(team1), team_key(team2)]))
 
 
 def date_pair_key(date, team1, team2):
+    """Crea una llave por fecha y pareja de equipos."""
     return (str(date or ""),) + pair_key(team1, team2)
 
 
+def date_time_key(date, time_value):
+    """Crea una llave por fecha y hora local del partido."""
+    return (str(date or ""), str(time_value or "")[:5])
+
+
 def first_value(obj, keys):
+    """Busca el primer valor presente dentro de un diccionario para una lista de llaves posibles."""
     if not isinstance(obj, dict):
         return None
     for key in keys:
@@ -106,23 +121,24 @@ def first_value(obj, keys):
 
 
 def all_scalar_values(obj, path=""):
+    """Recorre una estructura JSON y entrega todas las hojas escalares con su ruta."""
     if isinstance(obj, dict):
-        for k, v in obj.items():
-            yield from all_scalar_values(v, f"{path}.{k}" if path else k)
+        for key, value in obj.items():
+            yield from all_scalar_values(value, f"{path}.{key}" if path else key)
     elif isinstance(obj, list):
-        for i, v in enumerate(obj):
-            yield from all_scalar_values(v, f"{path}[{i}]")
+        for index, value in enumerate(obj):
+            yield from all_scalar_values(value, f"{path}[{index}]")
     else:
         yield path, obj
 
 
 def text_from_localized(value):
+    """Extrae texto desde estructuras localizadas de FIFA."""
     if value is None:
         return ""
     if isinstance(value, str):
         return value
     if isinstance(value, list):
-        # Prefer English localized rows if available.
         for item in value:
             if isinstance(item, dict):
                 locale = normalize_text(item.get("Locale") or item.get("locale") or item.get("Language") or item.get("language"))
@@ -137,19 +153,20 @@ def text_from_localized(value):
     if isinstance(value, dict):
         direct = first_value(value, [
             "Description", "description", "Name", "name", "DisplayName", "displayName",
-            "ShortName", "shortName", "Abbreviation", "abbreviation", "Text", "text", "Value", "value"
+            "ShortName", "shortName", "Abbreviation", "abbreviation", "Text", "text", "Value", "value",
         ])
         return text_from_localized(direct) if direct is not None else ""
     return ""
 
 
 def extract_team_name(team_obj):
+    """Extrae nombre de equipo desde un string o estructura de equipo."""
     if isinstance(team_obj, str):
         return team_obj
     if isinstance(team_obj, dict):
         for key in [
             "Name", "name", "TeamName", "teamName", "DisplayName", "displayName",
-            "ShortName", "shortName", "CountryName", "countryName", "Abbreviation", "abbreviation"
+            "ShortName", "shortName", "CountryName", "countryName", "Abbreviation", "abbreviation",
         ]:
             text = text_from_localized(team_obj.get(key))
             if text:
@@ -158,6 +175,7 @@ def extract_team_name(team_obj):
 
 
 def to_int(value):
+    """Convierte un valor a entero si contiene un marcador válido."""
     if value in (None, ""):
         return None
     try:
@@ -168,7 +186,7 @@ def to_int(value):
 
 
 def find_score_near(obj, side):
-    """Find score/goals for home/away in nested FIFA structures."""
+    """Busca marcador local/visitante dentro de estructuras anidadas."""
     if not isinstance(obj, dict):
         return None
 
@@ -177,15 +195,13 @@ def find_score_near(obj, side):
         "away": ["away", "awayTeam", "AwayTeam", "Away"],
     }[side]
 
-    # 1) Direct fields on root.
     direct_keys = []
     for side_word in side_words:
         direct_keys.extend([
             f"{side_word}Score", f"{side_word}TeamScore", f"{side_word}Goals",
-            f"{side_word}TeamGoals", f"{side_word}Result", f"{side_word}FTScore"
+            f"{side_word}TeamGoals", f"{side_word}Result", f"{side_word}FTScore",
         ])
 
-    # Add common casing variants.
     expanded = set(direct_keys)
     for key in list(direct_keys):
         expanded.add(key[:1].upper() + key[1:])
@@ -197,18 +213,16 @@ def find_score_near(obj, side):
             if val is not None:
                 return val
 
-    # 2) Nested HomeTeam/AwayTeam object.
     team_obj = first_value(obj, side_words)
     if isinstance(team_obj, dict):
         nested = first_value(team_obj, [
             "Score", "score", "Goals", "goals", "TeamScore", "teamScore",
-            "TotalScore", "totalScore", "Result", "result"
+            "TotalScore", "totalScore", "Result", "result",
         ])
         val = to_int(nested)
         if val is not None:
             return val
 
-    # 3) Result/Score containers.
     for container_key in ["Result", "result", "Score", "score", "MatchResult", "matchResult"]:
         container = obj.get(container_key)
         if isinstance(container, dict):
@@ -216,7 +230,6 @@ def find_score_near(obj, side):
             if val is not None:
                 return val
 
-    # 4) Generic path search: path should include home/away and score/goal.
     for path, value in all_scalar_values(obj):
         p = path.lower()
         if side in p and any(word in p for word in ["score", "goal", "goals"]):
@@ -228,32 +241,25 @@ def find_score_near(obj, side):
 
 
 def normalize_status(raw_status, match_obj=None):
+    """Normaliza estatus de partido evitando marcar como en vivo por códigos numéricos ambiguos."""
     raw_text = text_from_localized(raw_status) if isinstance(raw_status, (dict, list)) else str(raw_status or "")
     status_text = normalize_text(raw_text)
 
     if status_text in {
         "ft", "full time", "fulltime", "finished", "final", "played", "completed",
-        "result", "post match", "postmatch", "ended", "match finished"
+        "result", "post match", "postmatch", "ended", "match finished",
     }:
         return "Final"
 
     if status_text in {
-        "live", "in progress", "first half", "second half", "half time", "halftime", "ht"
+        "live", "in progress", "first half", "second half", "half time", "halftime", "ht",
     }:
         return "En vivo"
 
-    # Numeric status fallback. FIFA often uses numeric status codes in some feeds.
-    # These mappings are intentionally conservative.
-    if status_text in {"3", "12"}:
-        return "Final"
-    if status_text in {"1", "2", "4", "5", "6", "7", "8", "9", "10", "11"}:
-        return "En vivo"
-
     if isinstance(match_obj, dict):
-        # Search all scalar status-ish fields for FT/full-time/final.
         for path, value in all_scalar_values(match_obj):
             p = path.lower()
-            if any(word in p for word in ["status", "period", "phase"]):
+            if any(word in p for word in ["status", "period", "phase", "state"]):
                 text = normalize_text(value)
                 if text in {"ft", "full time", "fulltime", "finished", "final", "played", "completed", "ended"}:
                     return "Final"
@@ -268,6 +274,7 @@ def normalize_status(raw_status, match_obj=None):
 
 
 def find_matches_list(payload):
+    """Encuentra la lista de partidos dentro de las diferentes formas de respuesta de FIFA."""
     if isinstance(payload, list):
         return payload
     if not isinstance(payload, dict):
@@ -297,16 +304,17 @@ def find_matches_list(payload):
 
 
 def extract_fifa_update(match):
+    """Convierte un partido de FIFA al formato interno de actualización."""
     if not isinstance(match, dict):
         return None
 
     match_id = first_value(match, ["IdMatch", "idMatch", "MatchId", "matchId", "Id", "id"])
     date_raw = first_value(match, ["Date", "date", "MatchDate", "matchDate", "MatchDateTime", "matchDateTime", "LocalDate", "localDate", "DateLocal", "dateLocal"])
     date = str(date_raw or "")[:10] if re.match(r"^\d{4}-\d{2}-\d{2}", str(date_raw or "")) else ""
+    time_value = str(date_raw or "")[11:16] if re.match(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}", str(date_raw or "")) else ""
 
     home_team_obj = first_value(match, ["HomeTeam", "homeTeam", "Home", "home"])
     away_team_obj = first_value(match, ["AwayTeam", "awayTeam", "Away", "away"])
-
     home_team = extract_team_name(home_team_obj)
     away_team = extract_team_name(away_team_obj)
 
@@ -315,28 +323,27 @@ def extract_fifa_update(match):
 
     home_score = find_score_near(match, "home")
     away_score = find_score_near(match, "away")
-
     status_raw = first_value(match, [
         "MatchStatus", "matchStatus", "Status", "status", "MatchStatusName", "matchStatusName",
-        "Period", "period", "MatchPeriod", "matchPeriod", "Phase", "phase"
+        "Period", "period", "MatchPeriod", "matchPeriod", "Phase", "phase",
     ])
     status = normalize_status(status_raw, match)
 
-    # If a feed has a score and the visual status is absent, do not force Final.
-    # But if status is final and score is present, apply it.
     return {
         "source": "FIFA",
         "event_id": str(match_id or ""),
         "date": date,
+        "time": time_value,
         "teams": [team_key(home_team), team_key(away_team)],
         "scores": [home_score, away_score],
         "score_available": home_score is not None and away_score is not None,
         "status": status,
-        "raw_teams": [home_team, away_team],
+        "raw_teams": [team_key(home_team), team_key(away_team)],
     }
 
 
 def extract_espn_update(event):
+    """Convierte un partido de ESPN al formato interno de actualización."""
     comp = (event.get("competitions") or [{}])[0]
     competitors = comp.get("competitors") or []
     if len(competitors) != 2:
@@ -362,11 +369,13 @@ def extract_espn_update(event):
 
     raw_date = str(event.get("date") or "")
     date = raw_date[:10] if re.match(r"^\d{4}-\d{2}-\d{2}", raw_date) else ""
+    time_value = raw_date[11:16] if re.match(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}", raw_date) else ""
 
     return {
         "source": "ESPN",
         "event_id": str(event.get("id") or ""),
         "date": date,
+        "time": time_value,
         "teams": teams,
         "scores": [to_int(scores[0]), to_int(scores[1])],
         "score_available": all(score.isdigit() for score in scores),
@@ -376,31 +385,56 @@ def extract_espn_update(event):
 
 
 def game_indexes(games):
-    by_id, by_date_pair, by_pair = {}, {}, {}
+    """Construye índices para empatar actualizaciones con juegos del dashboard."""
+    by_id, by_date_pair, by_pair, by_date_time = {}, {}, {}, {}
     for game in games:
         if game.get("id"):
             by_id[str(game.get("id"))] = game
         by_date_pair[date_pair_key(game.get("date"), game.get("team1"), game.get("team2"))] = game
         by_pair[pair_key(game.get("team1"), game.get("team2"))] = game
-    return by_id, by_date_pair, by_pair
+        by_date_time[date_time_key(game.get("date"), game.get("time"))] = game
+    return by_id, by_date_pair, by_pair, by_date_time
 
 
-def find_matching_game(update, by_id, by_date_pair, by_pair):
+def find_matching_game(update, by_id, by_date_pair, by_pair, by_date_time):
+    """Busca el juego local correspondiente a una actualización externa."""
     if update["event_id"] and update["event_id"] in by_id:
-        return by_id[update["event_id"]]
+        return by_id[update["event_id"]], "id"
+
     dated = by_date_pair.get((update["date"],) + tuple(sorted(update["teams"])))
-    return dated or by_pair.get(tuple(sorted(update["teams"])))
+    if dated:
+        return dated, "date_pair"
+
+    paired = by_pair.get(tuple(sorted(update["teams"])))
+    if paired:
+        return paired, "pair"
+
+    timed = by_date_time.get(date_time_key(update.get("date"), update.get("time")))
+    if timed and timed.get("group") == "KO":
+        return timed, "date_time"
+
+    return None, ""
 
 
 def score_in_dashboard_order(game, update):
+    """Genera el marcador en el orden en el que se muestra el partido en el dashboard."""
     if not update["score_available"]:
         return None
     if team_key(game.get("team1")) == update["teams"][0]:
         return f"{update['scores'][0]} - {update['scores'][1]}"
-    return f"{update['scores'][1]} - {update['scores'][0]}"
+    if team_key(game.get("team2")) == update["teams"][0]:
+        return f"{update['scores'][1]} - {update['scores'][0]}"
+    return f"{update['scores'][0]} - {update['scores'][1]}"
 
 
-def should_apply_update(game, new_score, new_status):
+def is_placeholder(value):
+    """Detecta placeholders de cruces eliminatorios."""
+    text = str(value or "")
+    return bool(re.search(r"Grupo|Ganador|Perdedor|^\d[A-L]$", text))
+
+
+def should_apply_update(game, new_score, new_status, match_method):
+    """Decide si la actualización externa debe modificar el juego local."""
     old_score = game.get("score", "")
     old_status = game.get("status", "")
 
@@ -408,34 +442,47 @@ def should_apply_update(game, new_score, new_status):
         return False
     if old_status == "Final" and old_score and new_score is None:
         return False
-    if new_status == "Programado":
+    if new_status == "Programado" and match_method != "date_time":
         return False
 
     return (new_score is not None and old_score != new_score) or (new_status and old_status != new_status)
 
 
-def apply_update(game, update):
+def apply_update(game, update, match_method):
+    """Aplica una actualización externa al juego local."""
+    changed = False
+
+    if match_method == "date_time" and game.get("group") == "KO":
+        if is_placeholder(game.get("team1")) and update["raw_teams"][0]:
+            game["team1"] = update["raw_teams"][0]
+            changed = True
+        if is_placeholder(game.get("team2")) and update["raw_teams"][1]:
+            game["team2"] = update["raw_teams"][1]
+            changed = True
+
     new_score = score_in_dashboard_order(game, update)
     new_status = update["status"]
 
-    if not should_apply_update(game, new_score, new_status):
-        return False
+    if should_apply_update(game, new_score, new_status, match_method):
+        if new_score is not None:
+            game["score"] = new_score
+            changed = True
+        if new_status:
+            game["status"] = new_status
+            changed = True
 
-    if new_score is not None:
-        game["score"] = new_score
-    if new_status:
-        game["status"] = new_status
+    if changed:
+        source_note = f"{update['source']} automatic update"
+        existing_notes = game.get("notes", "")
+        if source_note not in existing_notes:
+            game["notes"] = f"{existing_notes} · {source_note}" if existing_notes else source_note
+        print(f"Applied {update['source']} update: {game.get('team1')} {game.get('score')} {game.get('team2')} [{game.get('status')}] via {match_method}")
 
-    source_note = f"{update['source']} automatic update"
-    existing_notes = game.get("notes", "")
-    if source_note not in existing_notes:
-        game["notes"] = f"{existing_notes} · {source_note}" if existing_notes else source_note
-
-    print(f"Applied {update['source']} update: {game.get('team1')} {game.get('score')} {game.get('team2')} [{game.get('status')}]")
-    return True
+    return changed
 
 
 def collect_fifa_updates():
+    """Descarga y normaliza actualizaciones desde FIFA."""
     try:
         payload = load_json_url(FIFA_URL)
     except Exception as exc:
@@ -451,6 +498,7 @@ def collect_fifa_updates():
 
 
 def collect_espn_updates(dates):
+    """Descarga y normaliza actualizaciones desde ESPN por fecha y por rango."""
     events_by_id = {}
 
     for date in sorted(set(dates)):
@@ -486,6 +534,7 @@ def collect_espn_updates(dates):
 
 
 def main():
+    """Ejecuta el proceso completo de actualización del JSON."""
     if not DATA_FILE.exists():
         print("worldcup_results.json not found")
         return 1
@@ -494,22 +543,21 @@ def main():
     games = payload["games"] if isinstance(payload, dict) else payload
     dates = [game.get("date") for game in games if game.get("date")]
 
-    by_id, by_date_pair, by_pair = game_indexes(games)
-
+    by_id, by_date_pair, by_pair, by_date_time = game_indexes(games)
     updates = collect_fifa_updates() + collect_espn_updates(dates)
 
     matched = 0
     changed = 0
 
     for update in updates:
-        game = find_matching_game(update, by_id, by_date_pair, by_pair)
+        game, match_method = find_matching_game(update, by_id, by_date_pair, by_pair, by_date_time)
         if not game:
             continue
 
         matched += 1
-
-        if apply_update(game, update):
+        if apply_update(game, update, match_method):
             changed += 1
+            by_id, by_date_pair, by_pair, by_date_time = game_indexes(games)
 
     print(f"Matched source updates to dashboard games: {matched}")
 
