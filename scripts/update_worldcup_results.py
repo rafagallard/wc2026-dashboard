@@ -7,10 +7,11 @@ Fuentes usadas:
 
 Notas de mantenimiento:
 - Los partidos de fase de grupos se empatan por id, fecha y equipos.
-- Los partidos eliminatorios también se empatan por fecha/hora porque el JSON local usa ids internos
-  como P73, P74, etc., mientras las fuentes públicas usan ids distintos.
-- Cuando un partido eliminatorio ya tiene equipos reales en la fuente, se reemplazan los placeholders
-  como "2º Grupo A" o "Ganador P73" por el nombre real del equipo.
+- Los partidos eliminatorios se empatan por fecha/hora local porque el JSON local usa ids internos
+  como P73, P74, etc., mientras ESPN/FIFA usan otros ids.
+- ESPN entrega fechas en UTC; este script las convierte a America/Mexico_City antes de comparar.
+- Cuando un partido eliminatorio ya tiene equipos reales, se reemplazan placeholders como
+  "2º Grupo A" o "Ganador P73" por el nombre real del equipo.
 """
 
 import datetime
@@ -21,8 +22,10 @@ import sys
 import time
 import urllib.request
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 DATA_FILE = Path("worldcup_results.json")
+LOCAL_TZ = ZoneInfo("America/Mexico_City")
 
 FIFA_URL = os.getenv(
     "FIFA_MATCHES_URL",
@@ -56,7 +59,7 @@ ALIASES = {
     "cape verde": "Cabo Verde", "saudi arabia": "Arabia Saudita", "uruguay": "Uruguay",
     "france": "Francia", "senegal": "Senegal", "iraq": "Irak", "norway": "Noruega",
     "argentina": "Argentina", "algeria": "Argelia", "austria": "Austria", "jordan": "Jordania",
-    "portugal": "Portugal", "dr congo": "RD Congo", "congo dr": "RD Congo",
+    "portugal": "Portugal", "dr congo": "RD Congo", "congo dr": "RD Congo", "democratic republic of congo": "RD Congo",
     "uzbekistan": "Uzbekistán", "colombia": "Colombia", "england": "Inglaterra",
     "croatia": "Croacia", "ghana": "Ghana", "panama": "Panamá",
 }
@@ -108,6 +111,30 @@ def date_pair_key(date, team1, team2):
 def date_time_key(date, time_value):
     """Crea una llave por fecha y hora local del partido."""
     return (str(date or ""), str(time_value or "")[:5])
+
+
+def source_datetime_to_local(raw_date):
+    """Convierte fecha/hora de una fuente externa a fecha y hora local del dashboard.
+
+    ESPN normalmente entrega ISO en UTC con sufijo Z. Al convertirlo a America/Mexico_City,
+    el P73 queda 2026-06-28 13:00 y ya puede empatar contra el JSON local.
+    """
+    raw = str(raw_date or "")
+    if not re.match(r"^\d{4}-\d{2}-\d{2}", raw):
+        return "", ""
+
+    if re.match(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}", raw):
+        normalized = raw.replace("Z", "+00:00")
+        try:
+            parsed = datetime.datetime.fromisoformat(normalized)
+            if parsed.tzinfo is None:
+                return raw[:10], raw[11:16]
+            local = parsed.astimezone(LOCAL_TZ)
+            return local.strftime("%Y-%m-%d"), local.strftime("%H:%M")
+        except ValueError:
+            return raw[:10], raw[11:16]
+
+    return raw[:10], ""
 
 
 def first_value(obj, keys):
@@ -310,8 +337,7 @@ def extract_fifa_update(match):
 
     match_id = first_value(match, ["IdMatch", "idMatch", "MatchId", "matchId", "Id", "id"])
     date_raw = first_value(match, ["Date", "date", "MatchDate", "matchDate", "MatchDateTime", "matchDateTime", "LocalDate", "localDate", "DateLocal", "dateLocal"])
-    date = str(date_raw or "")[:10] if re.match(r"^\d{4}-\d{2}-\d{2}", str(date_raw or "")) else ""
-    time_value = str(date_raw or "")[11:16] if re.match(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}", str(date_raw or "")) else ""
+    date, time_value = source_datetime_to_local(date_raw)
 
     home_team_obj = first_value(match, ["HomeTeam", "homeTeam", "Home", "home"])
     away_team_obj = first_value(match, ["AwayTeam", "awayTeam", "Away", "away"])
@@ -336,7 +362,7 @@ def extract_fifa_update(match):
         "time": time_value,
         "teams": [team_key(home_team), team_key(away_team)],
         "scores": [home_score, away_score],
-        "score_available": home_score is not None and away_score is not None,
+        "score_available": status != "Programado" and home_score is not None and away_score is not None,
         "status": status,
         "raw_teams": [team_key(home_team), team_key(away_team)],
     }
@@ -367,9 +393,7 @@ def extract_espn_update(event):
     else:
         status = "Programado"
 
-    raw_date = str(event.get("date") or "")
-    date = raw_date[:10] if re.match(r"^\d{4}-\d{2}-\d{2}", raw_date) else ""
-    time_value = raw_date[11:16] if re.match(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}", raw_date) else ""
+    date, time_value = source_datetime_to_local(event.get("date"))
 
     return {
         "source": "ESPN",
@@ -378,7 +402,7 @@ def extract_espn_update(event):
         "time": time_value,
         "teams": teams,
         "scores": [to_int(scores[0]), to_int(scores[1])],
-        "score_available": all(score.isdigit() for score in scores),
+        "score_available": status != "Programado" and all(score.isdigit() for score in scores),
         "status": status,
         "raw_teams": teams,
     }
@@ -392,7 +416,8 @@ def game_indexes(games):
             by_id[str(game.get("id"))] = game
         by_date_pair[date_pair_key(game.get("date"), game.get("team1"), game.get("team2"))] = game
         by_pair[pair_key(game.get("team1"), game.get("team2"))] = game
-        by_date_time[date_time_key(game.get("date"), game.get("time"))] = game
+        key = date_time_key(game.get("date"), game.get("time"))
+        by_date_time.setdefault(key, []).append(game)
     return by_id, by_date_pair, by_pair, by_date_time
 
 
@@ -409,9 +434,10 @@ def find_matching_game(update, by_id, by_date_pair, by_pair, by_date_time):
     if paired:
         return paired, "pair"
 
-    timed = by_date_time.get(date_time_key(update.get("date"), update.get("time")))
-    if timed and timed.get("group") == "KO":
-        return timed, "date_time"
+    candidates = by_date_time.get(date_time_key(update.get("date"), update.get("time")), [])
+    ko_candidates = [game for game in candidates if game.get("group") == "KO"]
+    if len(ko_candidates) == 1:
+        return ko_candidates[0], "date_time"
 
     return None, ""
 
@@ -442,7 +468,7 @@ def should_apply_update(game, new_score, new_status, match_method):
         return False
     if old_status == "Final" and old_score and new_score is None:
         return False
-    if new_status == "Programado" and match_method != "date_time":
+    if new_status == "Programado":
         return False
 
     return (new_score is not None and old_score != new_score) or (new_status and old_status != new_status)
