@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-28T04:44:09+00:00",
+  "updatedAt": "2026-06-29T16:48:29+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1018,13 +1018,13 @@
       "time": "13:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "2º Grupo A",
-      "score": "",
-      "team2": "2º Grupo B",
-      "status": "Por definir",
+      "team1": "Sudáfrica",
+      "score": "0 - 1",
+      "team2": "Canadá",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "SoFi Stadium / Los Angeles Stadium, Los Ángeles, Estados Unidos",
-      "notes": "Partido 73"
+      "notes": "Partido 73 · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "P76",
@@ -1032,13 +1032,13 @@
       "time": "11:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "1º Grupo C",
+      "team1": "Brasil",
       "score": "",
-      "team2": "2º Grupo F",
+      "team2": "Japón",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "NRG Stadium / Houston Stadium, Houston, Estados Unidos",
-      "notes": "Partido 76"
+      "notes": "Partido 76 · FIFA automatic update"
     },
     {
       "id": "P74",
@@ -1046,13 +1046,13 @@
       "time": "14:30",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "1º Grupo E",
+      "team1": "Alemania",
       "score": "",
-      "team2": "3º Grupo A/B/C/D/F",
+      "team2": "Paraguay",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Gillette Stadium / Boston Stadium, Foxborough, Estados Unidos",
-      "notes": "Partido 74"
+      "notes": "Partido 74 · FIFA automatic update"
     },
     {
       "id": "P75",
@@ -1060,13 +1060,13 @@
       "time": "19:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "1º Grupo F",
+      "team1": "Países Bajos",
       "score": "",
-      "team2": "2º Grupo C",
+      "team2": "Marruecos",
       "status": "Por definir",
       "host": "México",
       "venue": "Estadio BBVA / Estadio Monterrey, Monterrey, México",
-      "notes": "Partido 75"
+      "notes": "Partido 75 · FIFA automatic update"
     },
     {
       "id": "P78",
@@ -1074,13 +1074,13 @@
       "time": "11:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "2º Grupo E",
+      "team1": "Côte d'Ivoire",
       "score": "",
-      "team2": "2º Grupo I",
+      "team2": "Noruega",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
-      "notes": "Partido 78"
+      "notes": "Partido 78 · FIFA automatic update"
     },
     {
       "id": "P77",
@@ -1088,13 +1088,13 @@
       "time": "15:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "1º Grupo I",
+      "team1": "Francia",
       "score": "",
-      "team2": "3º Grupo C/D/F/G/H",
+      "team2": "Suecia",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "MetLife Stadium / New York New Jersey Stadium, East Rutherford, Estados Unidos",
-      "notes": "Partido 77"
+      "notes": "Partido 77 · FIFA automatic update"
     },
     {
       "id": "P79",
@@ -1102,13 +1102,13 @@
       "time": "19:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "1º Grupo A",
+      "team1": "México",
       "score": "",
-      "team2": "3º Grupo C/E/F/H/I",
+      "team2": "Ecuador",
       "status": "Por definir",
       "host": "México",
       "venue": "Estadio Azteca / Mexico City Stadium, Ciudad de México, México",
-      "notes": "Partido 79"
+      "notes": "Partido 79 · FIFA automatic update"
     },
     {
       "id": "P80",
@@ -1116,13 +1116,13 @@
       "time": "10:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "1º Grupo L",
+      "team1": "Inglaterra",
       "score": "",
-      "team2": "3º Grupo E/H/I/J/K",
+      "team2": "RD Congo",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Mercedes-Benz Stadium / Atlanta Stadium, Atlanta, Estados Unidos",
-      "notes": "Partido 80"
+      "notes": "Partido 80 · FIFA automatic update"
     },
     {
       "id": "P82",
@@ -1130,13 +1130,13 @@
       "time": "14:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "1º Grupo G",
+      "team1": "Bélgica",
       "score": "",
-      "team2": "3º Grupo A/E/H/I/J",
+      "team2": "Senegal",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Lumen Field / Seattle Stadium, Seattle, Estados Unidos",
-      "notes": "Partido 82"
+      "notes": "Partido 82 · FIFA automatic update"
     },
     {
       "id": "P81",
@@ -1144,13 +1144,13 @@
       "time": "18:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "1º Grupo D",
+      "team1": "Estados Unidos",
       "score": "",
-      "team2": "3º Grupo B/E/F/I/J",
+      "team2": "Bosnia y Herzegovina",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Levi’s Stadium / San Francisco Bay Area Stadium, Santa Clara, Estados Unidos",
-      "notes": "Partido 81"
+      "notes": "Partido 81 · FIFA automatic update"
     },
     {
       "id": "P84",
@@ -1158,13 +1158,13 @@
       "time": "13:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "1º Grupo H",
+      "team1": "España",
       "score": "",
-      "team2": "2º Grupo J",
+      "team2": "Austria",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "SoFi Stadium / Los Angeles Stadium, Los Ángeles, Estados Unidos",
-      "notes": "Partido 84"
+      "notes": "Partido 84 · FIFA automatic update"
     },
     {
       "id": "P83",
@@ -1172,13 +1172,13 @@
       "time": "17:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "2º Grupo K",
+      "team1": "Portugal",
       "score": "",
-      "team2": "2º Grupo L",
+      "team2": "Croacia",
       "status": "Por definir",
       "host": "Canadá",
       "venue": "BMO Field / Toronto Stadium, Toronto, Canadá",
-      "notes": "Partido 83"
+      "notes": "Partido 83 · FIFA automatic update"
     },
     {
       "id": "P85",
@@ -1186,13 +1186,13 @@
       "time": "21:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "1º Grupo B",
+      "team1": "Suiza",
       "score": "",
-      "team2": "3º Grupo E/F/G/I/J",
+      "team2": "Argelia",
       "status": "Por definir",
       "host": "Canadá",
       "venue": "BC Place / Vancouver Stadium, Vancouver, Canadá",
-      "notes": "Partido 85"
+      "notes": "Partido 85 · FIFA automatic update"
     },
     {
       "id": "P88",
@@ -1200,13 +1200,13 @@
       "time": "12:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "2º Grupo D",
+      "team1": "Australia",
       "score": "",
-      "team2": "2º Grupo G",
+      "team2": "Egipto",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
-      "notes": "Partido 88"
+      "notes": "Partido 88 · FIFA automatic update"
     },
     {
       "id": "P86",
@@ -1214,13 +1214,13 @@
       "time": "16:00",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "1º Grupo J",
+      "team1": "Argentina",
       "score": "",
-      "team2": "2º Grupo H",
+      "team2": "Cabo Verde",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
-      "notes": "Partido 86"
+      "notes": "Partido 86 · FIFA automatic update"
     },
     {
       "id": "P87",
@@ -1228,13 +1228,13 @@
       "time": "19:30",
       "stage": "32avos de final",
       "group": "KO",
-      "team1": "1º Grupo K",
+      "team1": "Colombia",
       "score": "",
-      "team2": "3º Grupo D/E/I/J/L",
+      "team2": "Ghana",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Arrowhead Stadium / Kansas City Stadium, Kansas City, Estados Unidos",
-      "notes": "Partido 87"
+      "notes": "Partido 87 · FIFA automatic update"
     },
     {
       "id": "P90",
@@ -1242,13 +1242,13 @@
       "time": "11:00",
       "stage": "Octavos de final",
       "group": "KO",
-      "team1": "Ganador P73",
+      "team1": "Canadá",
       "score": "",
-      "team2": "Ganador P75",
+      "team2": "Round of 32 3 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "NRG Stadium / Houston Stadium, Houston, Estados Unidos",
-      "notes": "Partido 90"
+      "notes": "Partido 90 · ESPN automatic update"
     },
     {
       "id": "P89",
@@ -1256,13 +1256,13 @@
       "time": "15:00",
       "stage": "Octavos de final",
       "group": "KO",
-      "team1": "Ganador P74",
+      "team1": "Round of 32 2 Winner",
       "score": "",
-      "team2": "Ganador P77",
+      "team2": "Round of 32 5 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Lincoln Financial Field / Philadelphia Stadium, Filadelfia, Estados Unidos",
-      "notes": "Partido 89"
+      "notes": "Partido 89 · ESPN automatic update"
     },
     {
       "id": "P91",
@@ -1270,13 +1270,13 @@
       "time": "14:00",
       "stage": "Octavos de final",
       "group": "KO",
-      "team1": "Ganador P76",
+      "team1": "Round of 32 4 Winner",
       "score": "",
-      "team2": "Ganador P78",
+      "team2": "Round of 32 6 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "MetLife Stadium / New York New Jersey Stadium, East Rutherford, Estados Unidos",
-      "notes": "Partido 91"
+      "notes": "Partido 91 · ESPN automatic update"
     },
     {
       "id": "P92",
@@ -1284,13 +1284,13 @@
       "time": "18:00",
       "stage": "Octavos de final",
       "group": "KO",
-      "team1": "Ganador P79",
+      "team1": "Round of 32 7 Winner",
       "score": "",
-      "team2": "Ganador P80",
+      "team2": "Round of 32 8 Winner",
       "status": "Por definir",
       "host": "México",
       "venue": "Estadio Azteca / Mexico City Stadium, Ciudad de México, México",
-      "notes": "Partido 92"
+      "notes": "Partido 92 · ESPN automatic update"
     },
     {
       "id": "P93",
@@ -1298,13 +1298,13 @@
       "time": "13:00",
       "stage": "Octavos de final",
       "group": "KO",
-      "team1": "Ganador P83",
+      "team1": "Round of 32 11 Winner",
       "score": "",
-      "team2": "Ganador P84",
+      "team2": "Round of 32 12 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
-      "notes": "Partido 93"
+      "notes": "Partido 93 · ESPN automatic update"
     },
     {
       "id": "P94",
@@ -1312,13 +1312,13 @@
       "time": "18:00",
       "stage": "Octavos de final",
       "group": "KO",
-      "team1": "Ganador P81",
+      "team1": "Round of 32 9 Winner",
       "score": "",
-      "team2": "Ganador P82",
+      "team2": "Round of 32 10 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Lumen Field / Seattle Stadium, Seattle, Estados Unidos",
-      "notes": "Partido 94"
+      "notes": "Partido 94 · ESPN automatic update"
     },
     {
       "id": "P95",
@@ -1326,13 +1326,13 @@
       "time": "10:00",
       "stage": "Octavos de final",
       "group": "KO",
-      "team1": "Ganador P86",
+      "team1": "Round of 32 14 Winner",
       "score": "",
-      "team2": "Ganador P88",
+      "team2": "Round of 32 16 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Mercedes-Benz Stadium / Atlanta Stadium, Atlanta, Estados Unidos",
-      "notes": "Partido 95"
+      "notes": "Partido 95 · ESPN automatic update"
     },
     {
       "id": "P96",
@@ -1340,13 +1340,13 @@
       "time": "14:00",
       "stage": "Octavos de final",
       "group": "KO",
-      "team1": "Ganador P85",
+      "team1": "Round of 32 13 Winner",
       "score": "",
-      "team2": "Ganador P87",
+      "team2": "Round of 32 15 Winner",
       "status": "Por definir",
       "host": "Canadá",
       "venue": "BC Place / Vancouver Stadium, Vancouver, Canadá",
-      "notes": "Partido 96"
+      "notes": "Partido 96 · ESPN automatic update"
     },
     {
       "id": "P97",
@@ -1354,13 +1354,13 @@
       "time": "14:00",
       "stage": "Cuartos de final",
       "group": "KO",
-      "team1": "Ganador P89",
+      "team1": "Round of 16 1 Winner",
       "score": "",
-      "team2": "Ganador P90",
+      "team2": "Round of 16 2 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Gillette Stadium / Boston Stadium, Foxborough, Estados Unidos",
-      "notes": "Partido 97"
+      "notes": "Partido 97 · ESPN automatic update"
     },
     {
       "id": "P98",
@@ -1368,13 +1368,13 @@
       "time": "13:00",
       "stage": "Cuartos de final",
       "group": "KO",
-      "team1": "Ganador P93",
+      "team1": "Round of 16 5 Winner",
       "score": "",
-      "team2": "Ganador P94",
+      "team2": "Round of 16 6 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "SoFi Stadium / Los Angeles Stadium, Los Ángeles, Estados Unidos",
-      "notes": "Partido 98"
+      "notes": "Partido 98 · ESPN automatic update"
     },
     {
       "id": "P99",
@@ -1382,13 +1382,13 @@
       "time": "15:00",
       "stage": "Cuartos de final",
       "group": "KO",
-      "team1": "Ganador P91",
+      "team1": "Round of 16 3 Winner",
       "score": "",
-      "team2": "Ganador P92",
+      "team2": "Round of 16 4 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
-      "notes": "Partido 99"
+      "notes": "Partido 99 · ESPN automatic update"
     },
     {
       "id": "P100",
@@ -1396,13 +1396,13 @@
       "time": "19:00",
       "stage": "Cuartos de final",
       "group": "KO",
-      "team1": "Ganador P95",
+      "team1": "Round of 16 7 Winner",
       "score": "",
-      "team2": "Ganador P96",
+      "team2": "Round of 16 8 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Arrowhead Stadium / Kansas City Stadium, Kansas City, Estados Unidos",
-      "notes": "Partido 100"
+      "notes": "Partido 100 · ESPN automatic update"
     },
     {
       "id": "P101",
@@ -1410,13 +1410,13 @@
       "time": "13:00",
       "stage": "Semifinal",
       "group": "KO",
-      "team1": "Ganador P97",
+      "team1": "Quarterfinal 1 Winner",
       "score": "",
-      "team2": "Ganador P98",
+      "team2": "Quarterfinal 2 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
-      "notes": "Partido 101"
+      "notes": "Partido 101 · ESPN automatic update"
     },
     {
       "id": "P102",
@@ -1424,13 +1424,13 @@
       "time": "13:00",
       "stage": "Semifinal",
       "group": "KO",
-      "team1": "Ganador P99",
+      "team1": "Quarterfinal 3 Winner",
       "score": "",
-      "team2": "Ganador P100",
+      "team2": "Quarterfinal 4 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Mercedes-Benz Stadium / Atlanta Stadium, Atlanta, Estados Unidos",
-      "notes": "Partido 102"
+      "notes": "Partido 102 · ESPN automatic update"
     },
     {
       "id": "P103",
@@ -1438,13 +1438,13 @@
       "time": "15:00",
       "stage": "Tercer lugar",
       "group": "KO",
-      "team1": "Perdedor P101",
+      "team1": "Semifinal 1 Loser",
       "score": "",
-      "team2": "Perdedor P102",
+      "team2": "Semifinal 2 Loser",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
-      "notes": "Partido 103"
+      "notes": "Partido 103 · ESPN automatic update"
     },
     {
       "id": "P104",
@@ -1452,13 +1452,13 @@
       "time": "13:00",
       "stage": "Final",
       "group": "KO",
-      "team1": "Ganador P101",
+      "team1": "Semifinal 1 Winner",
       "score": "",
-      "team2": "Ganador P102",
+      "team2": "Semifinal 2 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "MetLife Stadium / New York New Jersey Stadium, East Rutherford, Estados Unidos",
-      "notes": "Partido 104 · Final"
+      "notes": "Partido 104 · Final · ESPN automatic update"
     }
   ]
 }
