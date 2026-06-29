@@ -1,0 +1,33 @@
+name: Patch pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/patch_navigation_and_eliminatorias.py'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Patch pages
+        run: python scripts/patch_navigation_and_eliminatorias.py
+
+      - name: Commit patched pages
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Clean eliminatorias page and navigation'
+          file_pattern: 'index.html predicciones.html clasificacion.html'
