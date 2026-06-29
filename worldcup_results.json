@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-29T19:53:17+00:00",
+  "updatedAt": "2026-06-29T21:23:52+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1047,12 +1047,12 @@
       "stage": "32avos de final",
       "group": "KO",
       "team1": "Alemania",
-      "score": "",
+      "score": "0 - 1",
       "team2": "Paraguay",
-      "status": "Por definir",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Gillette Stadium / Boston Stadium, Foxborough, Estados Unidos",
-      "notes": "Partido 74 · FIFA automatic update"
+      "notes": "Partido 74 · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "P75",
