@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Clasificación Mundial 2026</title>
+  <title>Eliminatorias Mundial 2026</title>
   <style>
     :root{--mx:#006847;--us:#3c3b6e;--ca:#d80621;--ink:#111827;--muted:#64748b;--line:#d7deea;--dark:#0b1220;--good:#dcfce7;--warn:#fff7e6;--bad:#f1f5f9;--shadow:0 18px 45px rgba(15,23,42,.10)}
     *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#f6f7f9;color:var(--ink)}
@@ -16,11 +16,9 @@
   </style>
 </head>
 <body>
-<header><div class="hero"><div><h1>Clasificación Mundial 2026</h1><div class="sub">Tablas y eliminatorias</div></div><div class="statusbar"><a class="nav-link" href="index.html">Dashboard</a><a class="nav-link" href="predicciones.html">Predicciones</a><div class="pill">Datos: <span id="lastUpdated">—</span></div></div></div></header>
+<header><div class="hero"><div><h1>Eliminatorias Mundial 2026</h1><div class="sub">Bracket del torneo</div></div><div class="statusbar"><a class="nav-link" href="index.html">Dashboard</a><a class="nav-link" href="predicciones.html">Predicciones</a><div class="pill">Datos: <span id="lastUpdated">—</span></div></div></div></header>
 <main>
-  <section class="tabs"><button class="tab active" data-view="groups">Clasificación</button><button class="tab" data-view="knockout">Eliminatorias</button></section>
-  <section id="groupsView"><div class="section-title"><h2>Clasificación por grupos</h2><div class="legend"><span>Verde: clasifica directo</span><span>Amarillo: mejores terceros</span><span>Gris: eliminado</span></div></div><div id="groupsGrid" class="grid"></div></section>
-  <section id="knockoutView" style="display:none"><div class="section-title"><h2>Eliminatorias</h2></div><div class="bracket-shell"><div id="bracketGrid" class="bracket"></div></div></section>
+  <section id="knockoutView"><div class="section-title"><h2>Eliminatorias</h2></div><div class="bracket-shell"><div id="bracketGrid" class="bracket"></div></div></section>
 </main>
 <div class="footer">© 2026 Camu · Todos los derechos reservados</div>
 <script>
@@ -54,7 +52,7 @@ function placeTitle(text,col){return`<div class="round-title" style="grid-column
 function placeMatch(n,col,row,side='left',span=3){return`<div style="grid-column:${col};grid-row:${row}/span ${span}">${matchCard(matchByNum(n),side)}</div>`}
 function renderBracket(){const leftR32=[[73,2],[75,5],[74,9],[77,12],[83,17],[84,20],[81,24],[82,27]],leftR16=[[89,3],[90,10],[93,18],[94,25]],leftQF=[[97,7],[98,22]],rightR32=[[76,2],[78,5],[79,9],[80,12],[86,17],[88,20],[85,24],[87,27]],rightR16=[[91,3],[92,10],[95,18],[96,25]],rightQF=[[99,7],[100,22]];$('bracketGrid').innerHTML=[placeTitle('Dieciseisavos de final',1),placeTitle('Octavos de final',2),placeTitle('Cuartos de final',3),placeTitle('Semifinal',4),placeTitle('Final',5),placeTitle('Semifinal',6),placeTitle('Cuartos de final',7),placeTitle('Octavos de final',8),placeTitle('Dieciseisavos de final',9),...leftR32.map(x=>placeMatch(x[0],1,x[1],'left')),...leftR16.map(x=>placeMatch(x[0],2,x[1],'left')),...leftQF.map(x=>placeMatch(x[0],3,x[1],'left')),placeMatch(101,4,14,'left'),`<div style="grid-column:5;grid-row:10/span 4"><div class="center-title">Final</div>${matchCard(matchByNum(104),'left')}</div>`,`<div style="grid-column:5;grid-row:18/span 4"><div class="third-title">Partido por el tercer puesto</div>${matchCard(matchByNum(103),'left')}</div>`,placeMatch(102,6,14,'right'),...rightQF.map(x=>placeMatch(x[0],7,x[1],'right')),...rightR16.map(x=>placeMatch(x[0],8,x[1],'right')),...rightR32.map(x=>placeMatch(x[0],9,x[1],'right'))].join('')}
 function setupTabs(){document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b===btn));$('groupsView').style.display=btn.dataset.view==='groups'?'block':'none';$('knockoutView').style.display=btn.dataset.view==='knockout'?'block':'none'}))}
-async function loadData(){const res=await fetch(DATA_URL+'?v='+Date.now(),{cache:'no-store'});const payload=await res.json();games=Array.isArray(payload)?payload:payload.games||[];$('lastUpdated').textContent=payload.updatedAt?new Date(payload.updatedAt).toLocaleString('es-MX'):'—';buildTables();renderGroups();renderBracket();setupTabs()}
+async function loadData(){const res=await fetch(DATA_URL+'?v='+Date.now(),{cache:'no-store'});const payload=await res.json();games=Array.isArray(payload)?payload:payload.games||[];$('lastUpdated').textContent=payload.updatedAt?new Date(payload.updatedAt).toLocaleString('es-MX'):'—';renderBracket()}
 loadData().catch(e=>{console.error(e);document.querySelector('main').innerHTML='<div class="empty">No se pudo cargar información.</div>'});
 </script>
 </body>
