@@ -4,6 +4,9 @@
 from pathlib import Path
 
 
+PATCH_VERSION = "2026-06-29-1"
+
+
 def replace_once(text: str, old: str, new: str) -> str:
     if old not in text:
         return text
