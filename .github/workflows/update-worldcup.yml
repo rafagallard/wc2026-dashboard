@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: '0 * * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/update_worldcup_results.py'
+      - '.github/workflows/update-worldcup.yml'
 
 permissions:
   contents: write
