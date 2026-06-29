@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-29T16:48:29+00:00",
+  "updatedAt": "2026-06-29T17:34:28+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1033,12 +1033,12 @@
       "stage": "32avos de final",
       "group": "KO",
       "team1": "Brasil",
-      "score": "",
+      "score": "0 - 1",
       "team2": "Japón",
-      "status": "Por definir",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "NRG Stadium / Houston Stadium, Houston, Estados Unidos",
-      "notes": "Partido 76 · FIFA automatic update"
+      "notes": "Partido 76 · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "P74",
