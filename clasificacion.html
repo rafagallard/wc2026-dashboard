@@ -24,35 +24,138 @@
 <script>
 const DATA_URL='./worldcup_results.json';
 const GROUPS='ABCDEFGHIJKL'.split('');
-const FLAGS={'México':'🇲🇽','Mexico':'🇲🇽','Sudáfrica':'🇿🇦','South Africa':'🇿🇦','Corea del Sur':'🇰🇷','Korea Republic':'🇰🇷','Chequia':'🇨🇿','Czechia':'🇨🇿','Canadá':'🇨🇦','Canada':'🇨🇦','Bosnia y Herzegovina':'🇧🇦','Bosnia and Herzegovina':'🇧🇦','Qatar':'🇶🇦','Suiza':'🇨🇭','Switzerland':'🇨🇭','Estados Unidos':'🇺🇸','United States':'🇺🇸','Paraguay':'🇵🇾','Australia':'🇦🇺','Turquía':'🇹🇷','Brasil':'🇧🇷','Brazil':'🇧🇷','Marruecos':'🇲🇦','Morocco':'🇲🇦','Haití':'🇭🇹','Escocia':'🏴','Alemania':'🇩🇪','Germany':'🇩🇪','Curazao':'🇨🇼','Costa de Marfil':'🇨🇮','Ivory Coast':'🇨🇮','Côte d’Ivoire':'🇨🇮','Côte d\'Ivoire':'🇨🇮','Ecuador':'🇪🇨','Países Bajos':'🇳🇱','Netherlands':'🇳🇱','Japón':'🇯🇵','Japan':'🇯🇵','Suecia':'🇸🇪','Sweden':'🇸🇪','Túnez':'🇹🇳','Bélgica':'🇧🇪','Belgium':'🇧🇪','Egipto':'🇪🇬','Egypt':'🇪🇬','Irán':'🇮🇷','Nueva Zelanda':'🇳🇿','España':'🇪🇸','Spain':'🇪🇸','Cabo Verde':'🇨🇻','Cape Verde':'🇨🇻','Arabia Saudita':'🇸🇦','Uruguay':'🇺🇾','Francia':'🇫🇷','France':'🇫🇷','Senegal':'🇸🇳','Irak':'🇮🇶','Noruega':'🇳🇴','Norway':'🇳🇴','Argentina':'🇦🇷','Argelia':'🇩🇿','Algeria':'🇩🇿','Austria':'🇦🇹','Jordania':'🇯🇴','Portugal':'🇵🇹','RD Congo':'🇨🇩','DR Congo':'🇨🇩','Uzbekistán':'🇺🇿','Colombia':'🇨🇴','Inglaterra':'🏴','England':'🏴','Croacia':'🇭🇷','Croatia':'🇭🇷','Ghana':'🇬🇭','Panamá':'🇵🇦'};
+const FLAGS={'México':'🇲🇽','Mexico':'🇲🇽','Sudáfrica':'🇿🇦','South Africa':'🇿🇦','Corea del Sur':'🇰🇷','Korea Republic':'🇰🇷','Chequia':'🇨🇿','Czechia':'🇨🇿','Canadá':'🇨🇦','Canada':'🇨🇦','Bosnia y Herzegovina':'🇧🇦','Bosnia and Herzegovina':'🇧🇦','Qatar':'🇶🇦','Suiza':'🇨🇭','Switzerland':'🇨🇭','Estados Unidos':'🇺🇸','United States':'🇺🇸','Paraguay':'🇵🇾','Australia':'🇦🇺','Turquía':'🇹🇷','Brasil':'🇧🇷','Brazil':'🇧🇷','Marruecos':'🇲🇦','Morocco':'🇲🇦','Haití':'🇭🇹','Escocia':'🏴','Alemania':'🇩🇪','Germany':'🇩🇪','Curazao':'🇨🇼','Costa de Marfil':'🇨🇮','Ivory Coast':'🇨🇮','Côte d'Ivoire':'🇨🇮','Côte d\'Ivoire':'🇨🇮','Ecuador':'🇪🇨','Países Bajos':'🇳🇱','Netherlands':'🇳🇱','Japón':'🇯🇵','Japan':'🇯🇵','Suecia':'🇸🇪','Sweden':'🇸🇪','Túnez':'🇹🇳','Bélgica':'🇧🇪','Belgium':'🇧🇪','Egipto':'🇪🇬','Egypt':'🇪🇬','Irán':'🇮🇷','Nueva Zelanda':'🇳🇿','España':'🇪🇸','Spain':'🇪🇸','Cabo Verde':'🇨🇻','Cape Verde':'🇨🇻','Arabia Saudita':'🇸🇦','Uruguay':'🇺🇾','Francia':'🇫🇷','France':'🇫🇷','Senegal':'🇸🇳','Irak':'🇮🇶','Noruega':'🇳🇴','Norway':'🇳🇴','Argentina':'🇦🇷','Argelia':'🇩🇿','Algeria':'🇩🇿','Austria':'🇦🇹','Jordania':'🇯🇴','Portugal':'🇵🇹','RD Congo':'🇨🇩','DR Congo':'🇨🇩','Uzbekistán':'🇺🇿','Colombia':'🇨🇴','Inglaterra':'🏴','England':'🏴','Croacia':'🇭🇷','Croatia':'🇭🇷','Ghana':'🇬🇭','Panamá':'🇵🇦'};
 let games=[],tables={};const $=id=>document.getElementById(id);
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function flag(t){return FLAGS[t]||'🏳️'}
-function parseScore(score){const m=String(score||'').match(/(\d+)\s*-\s*(\d+)/);return m?[Number(m[1]),Number(m[2])]:null}function penaltyHTML(g){return g?.penalties?`<div class="match-date"><strong>Penales: ${esc(g.penalties)}</strong></div>`:''}
+function parseScore(score){const m=String(score||'').match(/(\d+)\s*-\s*(\d+)/);return m?[Number(m[1]),Number(m[2])]:null}
+function penaltyHTML(g){return g?.penalties?`<div class="match-date"><strong>Penales: ${esc(g.penalties)}</strong></div>`:''}
 function initTeam(name){return{team:name,pts:0,pj:0,g:0,e:0,p:0,gf:0,gc:0,dg:0}}
 function sourceDateTime(g){const time=g.time||'00:00';return new Date(`${g.date}T${time}:00-06:00`)}
 function fmtDate(g){return g?.date?sourceDateTime(g).toLocaleDateString('es-MX',{day:'2-digit',month:'2-digit',year:'numeric'}):'Por definir'}
 function fmtTime(g){return g?.time?sourceDateTime(g).toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}):'--:--'}
-function teamSpanish(t){const map={'Brazil':'Brasil','Japan':'Japón','Germany':'Alemania','Netherlands':'Países Bajos','Morocco':'Marruecos','Ivory Coast':'Costa de Marfil','Côte d’Ivoire':'Costa de Marfil',"Côte d'Ivoire":'Costa de Marfil','Norway':'Noruega','Mexico':'México','England':'Inglaterra','DR Congo':'RD Congo','Switzerland':'Suiza','Egypt':'Egipto','Cape Verde':'Cabo Verde','South Africa':'Sudáfrica','Canada':'Canadá','United States':'Estados Unidos','Bosnia and Herzegovina':'Bosnia y Herzegovina','Spain':'España','Croatia':'Croacia','Algeria':'Argelia','France':'Francia','Sweden':'Suecia','Belgium':'Bélgica'};return map[String(t||'')]||String(t||'')}
-function translatePlaceholder(v){let text=String(v||'Por definir');text=text.replace(/TBD/gi,'Por definir');text=text.replace(/Round of 32 Winner/gi,'Ganador 32avos');text=text.replace(/Round of 32 Loser/gi,'Perdedor 32avos');text=text.replace(/Round of 16 Winner/gi,'Ganador octavos');text=text.replace(/Round of 16 Loser/gi,'Perdedor octavos');text=text.replace(/Quarterfinal Winner/gi,'Ganador cuartos');text=text.replace(/Quarterfinal Loser/gi,'Perdedor cuartos');text=text.replace(/Semifinal 1 Winner/gi,'Ganador semifinal 1');text=text.replace(/Semifinal 2 Winner/gi,'Ganador semifinal 2');text=text.replace(/Semifinal 1 Loser/gi,'Perdedor semifinal 1');text=text.replace(/Semifinal 2 Loser/gi,'Perdedor semifinal 2');text=text.replace(/Winner of/gi,'Ganador');text=text.replace(/Loser of/gi,'Perdedor');return text}
-function buildTables(){const map={};games.filter(g=>g.group&&g.group!=='KO').forEach(g=>{map[g.group]=map[g.group]||{};[g.team1,g.team2].forEach(t=>{if(t&&!map[g.group][t])map[g.group][t]=initTeam(t)});if(String(g.status||'').toLowerCase()==='final'){const s=parseScore(g.score);if(!s)return;const a=map[g.group][g.team1],b=map[g.group][g.team2];a.pj++;b.pj++;a.gf+=s[0];a.gc+=s[1];b.gf+=s[1];b.gc+=s[0];if(s[0]>s[1]){a.g++;b.p++;a.pts+=3}else if(s[0]<s[1]){b.g++;a.p++;b.pts+=3}else{a.e++;b.e++;a.pts++;b.pts++}a.dg=a.gf-a.gc;b.dg=b.gf-b.gc}});tables={};GROUPS.forEach(gr=>{tables[gr]=Object.values(map[gr]||{}).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf||a.team.localeCompare(b.team,'es')).map((t,i)=>({...t,group:gr,pos:i+1}))})}
-function groupsComplete(){return GROUPS.every(g=>games.filter(x=>x.group===g).length&&games.filter(x=>x.group===g).every(x=>String(x.status||'').toLowerCase()==='final'))}
-function thirdRankSet(){const thirds=GROUPS.map(g=>tables[g]?.[2]).filter(Boolean).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf||a.team.localeCompare(b.team,'es')).slice(0,8);return new Set(thirds.map(t=>t.team))}
-function rowClass(t,bestThirds,allDone){if(t.pos<=2)return'direct';if(t.pos===3)return(!allDone||bestThirds.has(t.team))?'third':'out';return'out'}
-function statusLabel(t,bestThirds,allDone){if(t.pos<=2)return'Clasificado';if(t.pos===3)return allDone?(bestThirds.has(t.team)?'Mejor 3º':'Eliminado'):'3º pendiente';return'Eliminado'}
-function renderGroups(){const allDone=groupsComplete(),bestThirds=thirdRankSet();$('groupsGrid').innerHTML=GROUPS.map(g=>`<section class="card"><div class="card-head"><h3>Grupo ${g}</h3><span>${tables[g]?.length||0} equipos</span></div><div class="table-wrap"><table><thead><tr><th class="num">#</th><th>Equipo</th><th class="num">PJ</th><th class="num">G</th><th class="num">E</th><th class="num">P</th><th class="num">GF</th><th class="num">GC</th><th class="num">DG</th><th class="num">PTS</th><th>Estado</th></tr></thead><tbody>${(tables[g]||[]).map(t=>{const cls=rowClass(t,bestThirds,allDone);return`<tr class="${cls}"><td class="num rank">${t.pos}</td><td class="team">${flag(t.team)} ${esc(teamSpanish(t.team))}</td><td class="num">${t.pj}</td><td class="num">${t.g}</td><td class="num">${t.e}</td><td class="num">${t.p}</td><td class="num">${t.gf}</td><td class="num">${t.gc}</td><td class="num">${t.dg}</td><td class="num"><strong>${t.pts}</strong></td><td><span class="status ${cls}">${statusLabel(t,bestThirds,allDone)}</span></td></tr>`}).join('')}</tbody></table></div></section>`).join('')}
+function teamSpanish(t){const map={'Brazil':'Brasil','Japan':'Japón','Germany':'Alemania','Netherlands':'Países Bajos','Morocco':'Marruecos','Ivory Coast':'Costa de Marfil','Côte d'Ivoire':'Costa de Marfil',"Côte d'Ivoire":'Costa de Marfil','Norway':'Noruega','Mexico':'México','England':'Inglaterra','DR Congo':'RD Congo','Switzerland':'Suiza','Egypt':'Egipto','Cape Verde':'Cabo Verde','South Africa':'Sudáfrica','Canada':'Canadá','United States':'Estados Unidos','Bosnia and Herzegovina':'Bosnia y Herzegovina','Spain':'España','Croatia':'Croacia','Algeria':'Argelia','France':'Francia','Sweden':'Suecia','Belgium':'Bélgica'};return map[String(t||'')]||String(t||'')}
+function translatePlaceholder(v){
+  let text=String(v||'Por definir');
+  text=text.replace(/TBD/gi,'Por definir');
+  // Patrones con número intercalado (ej: "Round of 32 4 Winner")
+  text=text.replace(/Round of 32 \d+ Winner/gi,'Ganador 32avos');
+  text=text.replace(/Round of 32 \d+ Loser/gi,'Perdedor 32avos');
+  text=text.replace(/Round of 16 \d+ Winner/gi,'Ganador Octavos');
+  text=text.replace(/Round of 16 \d+ Loser/gi,'Perdedor Octavos');
+  text=text.replace(/Quarterfinal \d+ Winner/gi,'Ganador Cuartos');
+  text=text.replace(/Quarterfinal \d+ Loser/gi,'Perdedor Cuartos');
+  text=text.replace(/Semifinal \d+ Winner/gi,'Ganador Semifinal');
+  text=text.replace(/Semifinal \d+ Loser/gi,'Perdedor Semifinal');
+  // Patrones sin número (fallback)
+  text=text.replace(/Round of 32 Winner/gi,'Ganador 32avos');
+  text=text.replace(/Round of 32 Loser/gi,'Perdedor 32avos');
+  text=text.replace(/Round of 16 Winner/gi,'Ganador Octavos');
+  text=text.replace(/Round of 16 Loser/gi,'Perdedor Octavos');
+  text=text.replace(/Quarterfinal Winner/gi,'Ganador Cuartos');
+  text=text.replace(/Quarterfinal Loser/gi,'Perdedor Cuartos');
+  text=text.replace(/Semifinal 1 Winner/gi,'Ganador Semifinal 1');
+  text=text.replace(/Semifinal 2 Winner/gi,'Ganador Semifinal 2');
+  text=text.replace(/Semifinal 1 Loser/gi,'Perdedor Semifinal 1');
+  text=text.replace(/Semifinal 2 Loser/gi,'Perdedor Semifinal 2');
+  text=text.replace(/Winner of/gi,'Ganador');
+  text=text.replace(/Loser of/gi,'Perdedor');
+  return text;
+}
 function isPlaceholder(v){return /Grupo|Ganador|Perdedor|Round of|Quarterfinal|Semifinal|Winner|Loser|TBD|^\d[A-L]$/.test(String(v||''))}
-function labelTeam(v){if(isPlaceholder(v))return esc(translatePlaceholder(v));const name=teamSpanish(v);return `${flag(v)} ${esc(name)}`}
 function sideScore(g,index){const s=parseScore(g.score);return s?s[index]:''}
-function winnerIndex(g){const s=parseScore(g.score);if(!s||String(g.status||'').toLowerCase()!=='final')return -1;if(s[0]!==s[1])return s[0]>s[1]?0:1;const p=parseScore(g.penalties);if(!p||p[0]===p[1])return -1;return p[0]>p[1]?0:1}
-function matchNum(g){return String(g?.notes||g?.id||'').match(/P\d+/)?.[0]||String(g?.id||'')}
-function matchByNum(n){return games.find(g=>matchNum(g)===`P${n}`)}
-function matchCard(g,side='left'){if(!g)return'<article class="match"><div class="side"><div class="side-team">Por definir</div><div class="score"></div></div><div class="side"><div class="side-team">Por definir</div><div class="score"></div></div></article>';const w=winnerIndex(g);return`<article class="match ${side==='right'?'right':''}"><div class="match-id">${esc(matchNum(g))}</div><div class="match-date"><span>${esc(String(g.status||'').toLowerCase()==='final'?'Finalizado':fmtDate(g))}</span><span>${esc(String(g.status||'').toLowerCase()==='final'?'':fmtTime(g))}</span></div><div class="side ${w===0?'winner':w===1?'loser':''}"><div class="side-team">${labelTeam(g.team1)}</div><div class="score">${esc(sideScore(g,0))}</div></div><div class="side ${w===1?'winner':w===0?'loser':''}"><div class="side-team">${labelTeam(g.team2)}</div><div class="score">${esc(sideScore(g,1))}</div></div>${penaltyHTML(g)}</article>`}
+function winnerIndex(g){
+  const s=parseScore(g.score);
+  if(!s||String(g.status||'').toLowerCase()!=='final')return -1;
+  if(s[0]!==s[1])return s[0]>s[1]?0:1;
+  const p=parseScore(g.penalties);
+  if(!p||p[0]===p[1])return -1;
+  return p[0]>p[1]?0:1;
+}
+
+// FIX: Usar id directamente para partidos KO (P73, P74, ... P104)
+// El bug original era que matchNum leía g.notes primero,
+// y P89 tiene "P77" en sus notes → matchByNum(89) devolvía undefined.
+function matchNum(g){
+  const id=String(g?.id||'');
+  // Si el id ya es formato "P\d+", usarlo directamente
+  if(/^P\d+$/.test(id))return id;
+  // Fallback: buscar en notes (para compatibilidad con otros formatos)
+  return String(g?.notes||'').match(/P\d+/)?.[0]||id;
+}
+function matchByNum(n){
+  // Primero buscar por id directo (más confiable)
+  return games.find(g=>g.id===`P${n}`)||games.find(g=>matchNum(g)===`P${n}`);
+}
+
+// FIX: Resolver "Ganador P77" → "Ganador Francia / Suecia" (o el ganador real si ya jugaron)
+function resolveWinnerLabel(v){
+  const m=String(v||'').match(/^Ganador\s+P(\d+)$/i);
+  if(!m)return null;
+  const src=matchByNum(Number(m[1]));
+  if(!src)return`Ganador P${m[1]}`;
+  const w=winnerIndex(src);
+  if(w===0)return teamSpanish(src.team1);
+  if(w===1)return teamSpanish(src.team2);
+  // Partido no disputado aún: mostrar "Ganador Equipo1 / Equipo2"
+  const t1=isPlaceholder(src.team1)?translatePlaceholder(src.team1):teamSpanish(src.team1);
+  const t2=isPlaceholder(src.team2)?translatePlaceholder(src.team2):teamSpanish(src.team2);
+  return`Ganador ${t1} / ${t2}`;
+}
+
+// FIX: labelTeam primero intenta resolver "Ganador PXX"
+function labelTeam(v){
+  const winner=resolveWinnerLabel(v);
+  if(winner!==null)return esc(winner);
+  if(isPlaceholder(v))return esc(translatePlaceholder(v));
+  const name=teamSpanish(v);
+  return`${flag(v)} ${esc(name)}`;
+}
+
+function matchCard(g,side='left'){
+  if(!g)return'<article class="match"><div class="side"><div class="side-team">Por definir</div><div class="score"></div></div><div class="side"><div class="side-team">Por definir</div><div class="score"></div></div></article>';
+  const w=winnerIndex(g);
+  return`<article class="match ${side==='right'?'right':''}"><div class="match-id">${esc(matchNum(g))}</div><div class="match-date"><span>${esc(String(g.status||'').toLowerCase()==='final'?'Finalizado':fmtDate(g))}</span><span>${esc(String(g.status||'').toLowerCase()==='final'?'':fmtTime(g))}</span></div><div class="side ${w===0?'winner':w===1?'loser':''}"><div class="side-team">${labelTeam(g.team1)}</div><div class="score">${esc(sideScore(g,0))}</div></div><div class="side ${w===1?'winner':w===0?'loser':''}"><div class="side-team">${labelTeam(g.team2)}</div><div class="score">${esc(sideScore(g,1))}</div></div>${penaltyHTML(g)}</article>`;
+}
 function placeTitle(text,col){return`<div class="round-title" style="grid-column:${col};grid-row:1">${esc(text)}</div>`}
 function placeMatch(n,col,row,side='left',span=3){return`<div style="grid-column:${col};grid-row:${row}/span ${span}">${matchCard(matchByNum(n),side)}</div>`}
-function renderBracket(){const leftR32=[[73,2],[75,5],[74,9],[77,12],[83,17],[84,20],[81,24],[82,27]],leftR16=[[90,3],[89,10],[93,18],[94,25]],leftQF=[[97,7],[98,22]],rightR32=[[76,2],[78,5],[79,9],[80,12],[86,17],[88,20],[85,24],[87,27]],rightR16=[[91,3],[92,10],[95,18],[96,25]],rightQF=[[99,7],[100,22]];$('bracketGrid').innerHTML=[placeTitle('Dieciseisavos de final',1),placeTitle('Octavos de final',2),placeTitle('Cuartos de final',3),placeTitle('Semifinal',4),placeTitle('Final',5),placeTitle('Semifinal',6),placeTitle('Cuartos de final',7),placeTitle('Octavos de final',8),placeTitle('Dieciseisavos de final',9),...leftR32.map(x=>placeMatch(x[0],1,x[1],'left')),...leftR16.map(x=>placeMatch(x[0],2,x[1],'left')),...leftQF.map(x=>placeMatch(x[0],3,x[1],'left')),placeMatch(101,4,14,'left'),`<div style="grid-column:5;grid-row:10/span 4"><div class="center-title">Final</div>${matchCard(matchByNum(104),'left')}</div>`,`<div style="grid-column:5;grid-row:18/span 4"><div class="third-title">Partido por el tercer puesto</div>${matchCard(matchByNum(103),'left')}</div>`,placeMatch(102,6,14,'right'),...rightQF.map(x=>placeMatch(x[0],7,x[1],'right')),...rightR16.map(x=>placeMatch(x[0],8,x[1],'right')),...rightR32.map(x=>placeMatch(x[0],9,x[1],'right'))].join('')}
-function setupTabs(){document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b===btn));$('groupsView').style.display=btn.dataset.view==='groups'?'block':'none';$('knockoutView').style.display=btn.dataset.view==='knockout'?'block':'none'}))}
-async function loadData(){const res=await fetch(DATA_URL+'?v='+Date.now(),{cache:'no-store'});const payload=await res.json();games=Array.isArray(payload)?payload:payload.games||[];$('lastUpdated').textContent=payload.updatedAt?new Date(payload.updatedAt).toLocaleString('es-MX'):'—';renderBracket()}
+function renderBracket(){
+  // P90 (Canadá vs Marruecos) arriba en fila 3, P89 (Paraguay vs Ganador P77) abajo en fila 10
+  const leftR32=[[73,2],[75,5],[74,9],[77,12],[83,17],[84,20],[81,24],[82,27]];
+  const leftR16=[[90,3],[89,10],[93,18],[94,25]];
+  const leftQF=[[97,7],[98,22]];
+  const rightR32=[[76,2],[78,5],[79,9],[80,12],[86,17],[88,20],[85,24],[87,27]];
+  const rightR16=[[91,3],[92,10],[95,18],[96,25]];
+  const rightQF=[[99,7],[100,22]];
+  $('bracketGrid').innerHTML=[
+    placeTitle('Dieciseisavos de final',1),
+    placeTitle('Octavos de final',2),
+    placeTitle('Cuartos de final',3),
+    placeTitle('Semifinal',4),
+    placeTitle('Final',5),
+    placeTitle('Semifinal',6),
+    placeTitle('Cuartos de final',7),
+    placeTitle('Octavos de final',8),
+    placeTitle('Dieciseisavos de final',9),
+    ...leftR32.map(x=>placeMatch(x[0],1,x[1],'left')),
+    ...leftR16.map(x=>placeMatch(x[0],2,x[1],'left')),
+    ...leftQF.map(x=>placeMatch(x[0],3,x[1],'left')),
+    placeMatch(101,4,14,'left'),
+    `<div style="grid-column:5;grid-row:10/span 4"><div class="center-title">Final</div>${matchCard(matchByNum(104),'left')}</div>`,
+    `<div style="grid-column:5;grid-row:18/span 4"><div class="third-title">Partido por el tercer puesto</div>${matchCard(matchByNum(103),'left')}</div>`,
+    placeMatch(102,6,14,'right'),
+    ...rightQF.map(x=>placeMatch(x[0],7,x[1],'right')),
+    ...rightR16.map(x=>placeMatch(x[0],8,x[1],'right')),
+    ...rightR32.map(x=>placeMatch(x[0],9,x[1],'right'))
+  ].join('');
+}
+async function loadData(){
+  const res=await fetch(DATA_URL+'?v='+Date.now(),{cache:'no-store'});
+  const payload=await res.json();
+  games=Array.isArray(payload)?payload:payload.games||[];
+  $('lastUpdated').textContent=payload.updatedAt?new Date(payload.updatedAt).toLocaleString('es-MX'):'—';
+  renderBracket();
+}
 loadData().catch(e=>{console.error(e);document.querySelector('main').innerHTML='<div class="empty">No se pudo cargar información.</div>'});
 </script>
 </body>
