@@ -1,37 +1,41 @@
 #!/usr/bin/env python3
-"""Actualiza resultados conocidos que se definieron por penales."""
+"""Limpia el filtro de fecha en predicciones y deja los partidos cerrados bloqueados."""
 
-import json
 from pathlib import Path
 
-DATA_FILE = Path("worldcup_results.json")
+PATH = Path("predicciones.html")
 
-PENALTY_UPDATES = {
-    "P74": {
-        "penalties": "3 - 4",
-        "note": "Penales: Paraguay 4 - 3 Alemania",
-    },
-    "P75": {
-        "penalties": "2 - 3",
-        "note": "Penales: Marruecos 3 - 2 Países Bajos",
-    },
-}
+
+def replace_all(text: str, old: str, new: str) -> str:
+    while old in text:
+        text = text.replace(old, new)
+    return text
 
 
 def main() -> None:
-    payload = json.loads(DATA_FILE.read_text(encoding="utf-8"))
-    games = payload.get("games", payload if isinstance(payload, list) else [])
+    text = PATH.read_text(encoding="utf-8")
 
-    for game in games:
-        update = PENALTY_UPDATES.get(str(game.get("id")))
-        if not update:
-            continue
-        game["penalties"] = update["penalties"]
-        notes = str(game.get("notes", ""))
-        if update["note"] not in notes:
-            game["notes"] = f"{notes} · {update['note']}" if notes else update["note"]
+    text = text.replace("Predicciones del día", "Predicciones por fecha")
+    text = text.replace(
+        "No hay partidos programados para hoy.",
+        "No hay partidos programados para la fecha seleccionada.",
+    )
 
-    DATA_FILE.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    text = text.replace(
+        "${penaltyHTML(g)}${penaltyHTML(g)}<div class=\"venue\">${esc(g.venue||'')}</div></article>",
+        "${penaltyHTML(g)}<div class=\"venue\">${esc(g.venue||'')}</div></article>",
+    )
+
+    duplicate_listener = "$('predictionDate')?.addEventListener('change',()=>{renderTodayMatches();buildMatchSelector();renderTodayPredictions();renderWinners();renderSelectedHistory();updateSelectedTeams()});$('predictionDate')?.addEventListener('change',()=>{renderTodayMatches();buildMatchSelector();renderTodayPredictions();renderWinners();renderSelectedHistory();updateSelectedTeams()});"
+    single_listener = "$('predictionDate')?.addEventListener('change',()=>{renderTodayMatches();buildMatchSelector();renderTodayPredictions();renderWinners();renderSelectedHistory();updateSelectedTeams()});"
+    text = replace_all(text, duplicate_listener, single_listener)
+
+    text = text.replace(
+        "if(!list.length){$('matchSelect').innerHTML='<option value=\"\">No hay partidos programados para hoy</option>'}",
+        "if(!list.length){$('matchSelect').innerHTML='<option value=\"\">No hay partidos programados para la fecha seleccionada</option>'}",
+    )
+
+    PATH.write_text(text, encoding="utf-8")
 
 
 if __name__ == "__main__":
