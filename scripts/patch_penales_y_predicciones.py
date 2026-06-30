@@ -4,6 +4,7 @@
 import json
 from pathlib import Path
 
+PATCH_RUN = "2026-06-30-01"
 DATA_PATH = Path("worldcup_results.json")
 BRACKET_PATH = Path("clasificacion.html")
 
