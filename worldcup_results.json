@@ -1052,7 +1052,8 @@
       "status": "Final",
       "host": "Estados Unidos",
       "venue": "Gillette Stadium / Boston Stadium, Foxborough, Estados Unidos",
-      "notes": "Partido 74 · FIFA automatic update · ESPN automatic update"
+      "notes": "Partido 74 · FIFA automatic update · ESPN automatic update · Penales: Paraguay 4 - 3 Alemania",
+      "penalties": "3 - 4"
     },
     {
       "id": "P75",
@@ -1066,7 +1067,8 @@
       "status": "Final",
       "host": "México",
       "venue": "Estadio BBVA / Estadio Monterrey, Monterrey, México",
-      "notes": "Partido 75 · FIFA automatic update · ESPN automatic update"
+      "notes": "Partido 75 · FIFA automatic update · ESPN automatic update · Penales: Marruecos 3 - 2 Países Bajos",
+      "penalties": "2 - 3"
     },
     {
       "id": "P78",
