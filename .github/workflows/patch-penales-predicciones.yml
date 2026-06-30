@@ -30,4 +30,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'Support penalties and prediction date filter'
-          file_pattern: 'scripts/update_worldcup_results.py index.html predicciones.html clasificacion.html'
+          file_pattern: 'scripts/update_worldcup_results.py index.html predicciones.html clasificacion.html worldcup_results.json'
