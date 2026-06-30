@@ -267,6 +267,35 @@ def find_score_near(obj, side):
     return None
 
 
+def penalty_score_near(obj, side):
+    """Busca marcador de penales local/visitante en estructuras de FIFA o ESPN."""
+    if not isinstance(obj, dict):
+        return None
+
+    side_terms = {
+        "home": ["home", "homeTeam", "HomeTeam", "Home"],
+        "away": ["away", "awayTeam", "AwayTeam", "Away"],
+    }[side]
+
+    for path, value in all_scalar_values(obj):
+        lowered = path.lower()
+        if any(term.lower() in lowered for term in side_terms) and any(term in lowered for term in ["penalty", "penalties", "shootout"]):
+            val = to_int(value)
+            if val is not None:
+                return val
+
+    return None
+
+
+def penalty_value_from_competitor(competitor):
+    """Obtiene goles de tanda de penales desde un competidor de ESPN."""
+    for key in ["shootoutScore", "penaltyScore", "penalties", "penaltyShootoutScore"]:
+        val = to_int((competitor or {}).get(key))
+        if val is not None:
+            return val
+    return penalty_score_near(competitor, "home")
+
+
 def normalize_status(raw_status, match_obj=None):
     """Normaliza estatus de partido evitando marcar como en vivo por códigos numéricos ambiguos."""
     raw_text = text_from_localized(raw_status) if isinstance(raw_status, (dict, list)) else str(raw_status or "")
@@ -349,6 +378,8 @@ def extract_fifa_update(match):
 
     home_score = find_score_near(match, "home")
     away_score = find_score_near(match, "away")
+    home_penalties = penalty_score_near(match, "home")
+    away_penalties = penalty_score_near(match, "away")
     status_raw = first_value(match, [
         "MatchStatus", "matchStatus", "Status", "status", "MatchStatusName", "matchStatusName",
         "Period", "period", "MatchPeriod", "matchPeriod", "Phase", "phase",
@@ -362,6 +393,8 @@ def extract_fifa_update(match):
         "time": time_value,
         "teams": [team_key(home_team), team_key(away_team)],
         "scores": [home_score, away_score],
+        "penalties": [home_penalties, away_penalties],
+        "penalties_available": status == "Final" and home_penalties is not None and away_penalties is not None,
         "score_available": status != "Programado" and home_score is not None and away_score is not None,
         "status": status,
         "raw_teams": [team_key(home_team), team_key(away_team)],
@@ -375,12 +408,13 @@ def extract_espn_update(event):
     if len(competitors) != 2:
         return None
 
-    teams, scores = [], []
+    teams, scores, penalties = [], [], []
     for competitor in competitors:
         team = competitor.get("team") or {}
         name = team.get("displayName") or team.get("shortDisplayName") or team.get("name") or ""
         teams.append(team_key(name))
         scores.append(str(competitor.get("score", "")).strip())
+        penalties.append(penalty_value_from_competitor(competitor))
 
     status_type = (comp.get("status") or {}).get("type") or {}
     status_name = str(status_type.get("name") or status_type.get("state") or "").upper()
@@ -402,6 +436,8 @@ def extract_espn_update(event):
         "time": time_value,
         "teams": teams,
         "scores": [to_int(scores[0]), to_int(scores[1])],
+        "penalties": penalties,
+        "penalties_available": status == "Final" and all(item is not None for item in penalties),
         "score_available": status != "Programado" and all(score.isdigit() for score in scores),
         "status": status,
         "raw_teams": teams,
@@ -453,6 +489,20 @@ def score_in_dashboard_order(game, update):
     return f"{update['scores'][0]} - {update['scores'][1]}"
 
 
+def penalties_in_dashboard_order(game, update):
+    """Genera el marcador de penales en el orden del dashboard."""
+    if not update.get("penalties_available"):
+        return None
+    penalties = update.get("penalties") or []
+    if len(penalties) != 2:
+        return None
+    if team_key(game.get("team1")) == update["teams"][0]:
+        return f"{penalties[0]} - {penalties[1]}"
+    if team_key(game.get("team2")) == update["teams"][0]:
+        return f"{penalties[1]} - {penalties[0]}"
+    return f"{penalties[0]} - {penalties[1]}"
+
+
 def is_placeholder(value):
     """Detecta placeholders de cruces eliminatorios."""
     text = str(value or "")
@@ -487,6 +537,7 @@ def apply_update(game, update, match_method):
             changed = True
 
     new_score = score_in_dashboard_order(game, update)
+    new_penalties = penalties_in_dashboard_order(game, update)
     new_status = update["status"]
 
     if should_apply_update(game, new_score, new_status, match_method):
@@ -496,6 +547,10 @@ def apply_update(game, update, match_method):
         if new_status:
             game["status"] = new_status
             changed = True
+
+    if new_penalties is not None and game.get("penalties", "") != new_penalties:
+        game["penalties"] = new_penalties
+        changed = True
 
     if changed:
         source_note = f"{update['source']} automatic update"
