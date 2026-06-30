@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-30T00:01:39+00:00",
+  "updatedAt": "2026-06-30T05:00:31+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1061,12 +1061,12 @@
       "stage": "32avos de final",
       "group": "KO",
       "team1": "Países Bajos",
-      "score": "",
+      "score": "1 - 1",
       "team2": "Marruecos",
-      "status": "Por definir",
+      "status": "Final",
       "host": "México",
       "venue": "Estadio BBVA / Estadio Monterrey, Monterrey, México",
-      "notes": "Partido 75 · FIFA automatic update"
+      "notes": "Partido 75 · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "P78",
