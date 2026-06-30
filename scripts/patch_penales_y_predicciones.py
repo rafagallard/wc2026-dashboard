@@ -4,6 +4,9 @@
 from pathlib import Path
 
 
+PATCH_VERSION = "2026-06-29-2"
+
+
 def write(path: str, text: str) -> None:
     Path(path).write_text(text, encoding="utf-8")
 
@@ -26,7 +29,7 @@ def patch_data_script() -> None:
         text = replace(
             text,
             "def normalize_status(raw_status, match_obj=None):",
-            '''def penalty_score_near(obj, side):\n    """Busca marcador de penales local/visitante en estructuras de FIFA o ESPN."""\n    if not isinstance(obj, dict):\n        return None\n\n    side_terms = {\n        "home": ["home", "homeTeam", "HomeTeam", "Home"],\n        "away": ["away", "awayTeam", "AwayTeam", "Away"],\n    }[side]\n\n    for path, value in all_scalar_values(obj):\n        lowered = path.lower()\n        if any(term.lower() in lowered for term in side_terms) and any(term in lowered for term in ["penalty", "penalties", "shootout"]):\n            val = to_int(value)\n            if val is not None:\n                return val\n\n    return None\n\n\ndef penalty_value_from_competitor(competitor):\n    """Obtiene goles de tanda de penales desde un competidor de ESPN."""\n    for key in ["shootoutScore", "penaltyScore", "penalties", "penaltyShootoutScore"]:\n        val = to_int((competitor or {}).get(key))\n        if val is not None:\n            return val\n    return penalty_score_near(competitor, "home")\n\n\ndef normalize_status(raw_status, match_obj=None):''',
+            '''def penalty_score_near(obj, side):\n    """Busca marcador de penales local/visitante en estructuras de FIFA o ESPN."""\n    if not isinstance(obj, dict):\n        return None\n\n    side_terms = {\n        "home": ["home", "homeTeam", "HomeTeam", "Home"],\n        "away": ["away", "awayTeam", "AwayTeam", "Away"],\n    }[side]\n\n    for path, value in all_scalar_values(obj):\n        lowered = path.lower()\n        if any(term.lower() in lowered for term in side_terms) and any(term in lowered for term in ["penalty", "penalties", "shootout"]):\n            val = to_int(value)\n            if val is not None:\n                return val\n\n    return None\n\n\ndef penalty_value_from_competitor(competitor):\n    """Obtiene goles de tanda de penales desde un competidor de ESPN."""\n    for key in ["shootoutScore", "penaltyScore", "penalties", "penaltyShootoutScore"]:\n        val = to_int((competitor or {}).get(key))\n        if val is not None:\n            return val\n    return None\n\n\ndef normalize_status(raw_status, match_obj=None):''',
         )
 
     text = replace(
