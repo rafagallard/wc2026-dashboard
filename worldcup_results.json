@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-30T09:29:35+00:00",
+  "updatedAt": "2026-06-30T17:50:38+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1077,12 +1077,12 @@
       "stage": "32avos de final",
       "group": "KO",
       "team1": "Côte d'Ivoire",
-      "score": "",
+      "score": "0 - 1",
       "team2": "Noruega",
-      "status": "Por definir",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
-      "notes": "Partido 78 · FIFA automatic update"
+      "notes": "Partido 78 · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "P77",
