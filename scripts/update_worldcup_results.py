@@ -380,6 +380,8 @@ def extract_fifa_update(match):
     away_score = find_score_near(match, "away")
     home_penalties = penalty_score_near(match, "home")
     away_penalties = penalty_score_near(match, "away")
+    home_penalties = penalty_score_near(match, "home")
+    away_penalties = penalty_score_near(match, "away")
     status_raw = first_value(match, [
         "MatchStatus", "matchStatus", "Status", "status", "MatchStatusName", "matchStatusName",
         "Period", "period", "MatchPeriod", "matchPeriod", "Phase", "phase",
@@ -547,6 +549,10 @@ def apply_update(game, update, match_method):
         if new_status:
             game["status"] = new_status
             changed = True
+
+    if new_penalties is not None and game.get("penalties", "") != new_penalties:
+        game["penalties"] = new_penalties
+        changed = True
 
     if new_penalties is not None and game.get("penalties", "") != new_penalties:
         game["penalties"] = new_penalties
