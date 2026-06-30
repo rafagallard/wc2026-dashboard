@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-30T05:00:31+00:00",
+  "updatedAt": "2026-06-30T09:29:35+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1260,7 +1260,7 @@
       "group": "KO",
       "team1": "Paraguay",
       "score": "",
-      "team2": "Ganador P77",
+      "team2": "Round of 32 5 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Lincoln Financial Field / Philadelphia Stadium, Filadelfia, Estados Unidos",
