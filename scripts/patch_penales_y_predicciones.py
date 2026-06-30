@@ -1,41 +1,51 @@
 #!/usr/bin/env python3
-"""Limpia el filtro de fecha en predicciones y deja los partidos cerrados bloqueados."""
+"""Corrige el cruce de octavos Canadá vs Marruecos en datos y bracket."""
 
+import json
 from pathlib import Path
 
-PATH = Path("predicciones.html")
+DATA_PATH = Path("worldcup_results.json")
+BRACKET_PATH = Path("clasificacion.html")
 
 
-def replace_all(text: str, old: str, new: str) -> str:
-    while old in text:
-        text = text.replace(old, new)
-    return text
+def patch_results() -> None:
+    payload = json.loads(DATA_PATH.read_text(encoding="utf-8"))
+    games = payload.get("games", payload if isinstance(payload, list) else [])
+
+    for game in games:
+        game_id = str(game.get("id", ""))
+
+        if game_id == "P90":
+            game["team1"] = "Canadá"
+            game["team2"] = "Marruecos"
+            notes = str(game.get("notes", ""))
+            marker = "Cruce confirmado: Canadá vs Marruecos"
+            if marker not in notes:
+                game["notes"] = f"{notes} · {marker}" if notes else marker
+
+        if game_id == "P89":
+            game["team1"] = "Paraguay"
+            game["team2"] = "Ganador P77"
+            notes = str(game.get("notes", ""))
+            marker = "Cruce confirmado: Paraguay vs ganador P77"
+            if marker not in notes:
+                game["notes"] = f"{notes} · {marker}" if notes else marker
+
+    DATA_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def patch_bracket() -> None:
+    text = BRACKET_PATH.read_text(encoding="utf-8")
+    text = text.replace(
+        "leftR16=[[89,3],[90,10],[93,18],[94,25]]",
+        "leftR16=[[90,3],[89,10],[93,18],[94,25]]",
+    )
+    BRACKET_PATH.write_text(text, encoding="utf-8")
 
 
 def main() -> None:
-    text = PATH.read_text(encoding="utf-8")
-
-    text = text.replace("Predicciones del día", "Predicciones por fecha")
-    text = text.replace(
-        "No hay partidos programados para hoy.",
-        "No hay partidos programados para la fecha seleccionada.",
-    )
-
-    text = text.replace(
-        "${penaltyHTML(g)}${penaltyHTML(g)}<div class=\"venue\">${esc(g.venue||'')}</div></article>",
-        "${penaltyHTML(g)}<div class=\"venue\">${esc(g.venue||'')}</div></article>",
-    )
-
-    duplicate_listener = "$('predictionDate')?.addEventListener('change',()=>{renderTodayMatches();buildMatchSelector();renderTodayPredictions();renderWinners();renderSelectedHistory();updateSelectedTeams()});$('predictionDate')?.addEventListener('change',()=>{renderTodayMatches();buildMatchSelector();renderTodayPredictions();renderWinners();renderSelectedHistory();updateSelectedTeams()});"
-    single_listener = "$('predictionDate')?.addEventListener('change',()=>{renderTodayMatches();buildMatchSelector();renderTodayPredictions();renderWinners();renderSelectedHistory();updateSelectedTeams()});"
-    text = replace_all(text, duplicate_listener, single_listener)
-
-    text = text.replace(
-        "if(!list.length){$('matchSelect').innerHTML='<option value=\"\">No hay partidos programados para hoy</option>'}",
-        "if(!list.length){$('matchSelect').innerHTML='<option value=\"\">No hay partidos programados para la fecha seleccionada</option>'}",
-    )
-
-    PATH.write_text(text, encoding="utf-8")
+    patch_results()
+    patch_bracket()
 
 
 if __name__ == "__main__":
