@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-01T03:33:21+00:00",
+  "updatedAt": "2026-07-01T08:09:44+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1107,7 +1107,7 @@
       "team1": "México",
       "score": "2 - 0",
       "team2": "Ecuador",
-      "status": "En vivo",
+      "status": "Final",
       "host": "México",
       "venue": "Estadio Azteca / Mexico City Stadium, Ciudad de México, México",
       "notes": "Partido 79 · FIFA automatic update · ESPN automatic update"
