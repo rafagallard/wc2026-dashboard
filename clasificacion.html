@@ -39,8 +39,8 @@ function translatePlaceholder(v){
   let text=String(v||'Por definir');
   text=text.replace(/TBD/gi,'Por definir');
   // Patrones con número intercalado (ej: "Round of 32 4 Winner")
-  text=text.replace(/Round of 32 \d+ Winner/gi,'Ganador 32avos');
-  text=text.replace(/Round of 32 \d+ Loser/gi,'Perdedor 32avos');
+  text=text.replace(/Round of 32 \d+ Winner/gi,'Ganador 16avos');
+  text=text.replace(/Round of 32 \d+ Loser/gi,'Perdedor 16avos');
   text=text.replace(/Round of 16 \d+ Winner/gi,'Ganador Octavos');
   text=text.replace(/Round of 16 \d+ Loser/gi,'Perdedor Octavos');
   text=text.replace(/Quarterfinal \d+ Winner/gi,'Ganador Cuartos');
@@ -48,8 +48,8 @@ function translatePlaceholder(v){
   text=text.replace(/Semifinal \d+ Winner/gi,'Ganador Semifinal');
   text=text.replace(/Semifinal \d+ Loser/gi,'Perdedor Semifinal');
   // Patrones sin número (fallback)
-  text=text.replace(/Round of 32 Winner/gi,'Ganador 32avos');
-  text=text.replace(/Round of 32 Loser/gi,'Perdedor 32avos');
+  text=text.replace(/Round of 32 Winner/gi,'Ganador 16avos');
+  text=text.replace(/Round of 32 Loser/gi,'Perdedor 16avos');
   text=text.replace(/Round of 16 Winner/gi,'Ganador Octavos');
   text=text.replace(/Round of 16 Loser/gi,'Perdedor Octavos');
   text=text.replace(/Quarterfinal Winner/gi,'Ganador Cuartos');
