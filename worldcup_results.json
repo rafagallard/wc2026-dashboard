@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-01T17:12:38+00:00",
+  "updatedAt": "2026-07-01T19:50:40+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1119,9 +1119,9 @@
       "stage": "32avos de final",
       "group": "KO",
       "team1": "Inglaterra",
-      "score": "0 - 1",
+      "score": "2 - 1",
       "team2": "RD Congo",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Mercedes-Benz Stadium / Atlanta Stadium, Atlanta, Estados Unidos",
       "notes": "Partido 80 · FIFA automatic update · ESPN automatic update"
