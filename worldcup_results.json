@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-01T21:25:47+00:00",
+  "updatedAt": "2026-07-01T23:12:24+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1133,9 +1133,9 @@
       "stage": "16avos de final",
       "group": "KO",
       "team1": "Bélgica",
-      "score": "0 - 2",
+      "score": "3 - 2",
       "team2": "Senegal",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Lumen Field / Seattle Stadium, Seattle, Estados Unidos",
       "notes": "Partido 82 · FIFA automatic update · ESPN automatic update"
