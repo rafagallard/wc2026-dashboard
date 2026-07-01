@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-30T23:09:10+00:00",
+  "updatedAt": "2026-07-01T03:33:21+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1105,12 +1105,12 @@
       "stage": "32avos de final",
       "group": "KO",
       "team1": "México",
-      "score": "",
+      "score": "2 - 0",
       "team2": "Ecuador",
-      "status": "Por definir",
+      "status": "En vivo",
       "host": "México",
       "venue": "Estadio Azteca / Mexico City Stadium, Ciudad de México, México",
-      "notes": "Partido 79 · FIFA automatic update"
+      "notes": "Partido 79 · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "P80",
