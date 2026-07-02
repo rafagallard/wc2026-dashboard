@@ -2,7 +2,7 @@ name: Update World Cup data
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/10 8-23 * * *'
   workflow_dispatch:
   push:
     branches:
