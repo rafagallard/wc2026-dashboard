@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-02T02:58:02+00:00",
+  "updatedAt": "2026-07-02T19:20:20+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1161,12 +1161,12 @@
       "stage": "16avos de final",
       "group": "KO",
       "team1": "España",
-      "score": "",
+      "score": "0 - 0",
       "team2": "Austria",
-      "status": "Por definir",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "SoFi Stadium / Los Angeles Stadium, Los Ángeles, Estados Unidos",
-      "notes": "Partido 84 · FIFA automatic update"
+      "notes": "Partido 84 · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "P83",
