@@ -38,15 +38,17 @@ function fmtDate(d){return new Date(d+'T12:00:00').toLocaleDateString('es-MX',{w
 function fmtTime(g){return g.time?sourceDateTime(g).toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit',timeZoneName:'short'}):'Por definir'}
 function normStatus(s){return(s||'Por definir').replaceAll(' ','-')}
 function parseScore(score){const m=String(score||'').match(/(\d+)\s*-\s*(\d+)/);return m?[Number(m[1]),Number(m[2])]:null}
+// CAMBIO: traducir "32avos de final" → "16avos de final" para display
+function stageLabel(stage){return String(stage||'').replace('32avos de final','16avos de final')}
 function selectedGames(){const d=selectedDate();return games.filter(g=>localDateKey(sourceDateTime(g))===d).sort((a,b)=>sourceDateTime(a)-sourceDateTime(b))}
-function groupLabel(g){return g.group&&g.group!=='KO'?`Grupo ${g.group}`:g.stage||'Partidos'}
+function groupLabel(g){return g.group&&g.group!=='KO'?`Grupo ${g.group}`:stageLabel(g.stage)||'Partidos'}
 function hasMatchStarted(g){return!!(g&&g.date&&g.time)&&new Date()>=sourceDateTime(g)}
 function predictionClosedReason(g){const st=String(g?.status||'').trim().toLowerCase();if(!g)return'No hay partido seleccionado.';if(st==='final')return'Predicción cerrada: partido finalizado.';if(hasMatchStarted(g)&&['en vivo','en-vivo'].includes(st))return'Predicción cerrada: partido en vivo.';if(hasMatchStarted(g))return'Predicción cerrada: el partido ya empezó.';return''}
 function canPredictMatch(g){return!predictionClosedReason(g)}
 function penaltyHTML(g){return g?.penalties?`<div class="penales">Penales: ${esc(g.penalties)}</div>`:''}
 function resultText(g){return g?.penalties?`${g.score||''} · Penales: ${g.penalties}`:(g?.score||'')}
 function matchById(id){return games.find(g=>String(g.id)===String(id))}
-function matchCard(g){const score=g.score?g.score:'vs';return`<article class="match-card" data-host="${esc(g.host||'')}"><div class="match-top"><div class="date">${fmtTime(g)} · ${esc(g.stage||'')}</div><span class="badge ${normStatus(g.status)}">${esc(g.status||'Por definir')}</span></div><div class="scoreline"><div class="team">${flag(g.team1)} ${esc(g.team1)}</div><div class="score ${g.score?'':'empty-score'}">${esc(score)}</div><div class="team right">${esc(g.team2)} ${flag(g.team2)}</div></div>${penaltyHTML(g)}<div class="venue">${esc(g.venue||'')}</div></article>`}
+function matchCard(g){const score=g.score?g.score:'vs';return`<article class="match-card" data-host="${esc(g.host||'')}"><div class="match-top"><div class="date">${fmtTime(g)} · ${esc(stageLabel(g.stage||''))}</div><span class="badge ${normStatus(g.status)}">${esc(g.status||'Por definir')}</span></div><div class="scoreline"><div class="team">${flag(g.team1)} ${esc(g.team1)}</div><div class="score ${g.score?'':'empty-score'}">${esc(score)}</div><div class="team right">${esc(g.team2)} ${flag(g.team2)}</div></div>${penaltyHTML(g)}<div class="venue">${esc(g.venue||'')}</div></article>`}
 function renderMatches(){const list=selectedGames(),grouped={};list.forEach(g=>{const k=groupLabel(g);if(!grouped[k])grouped[k]=[];grouped[k].push(g)});$('todayLabel').textContent=fmtDate(selectedDate());$('timeZoneLabel').textContent=Intl.DateTimeFormat().resolvedOptions().timeZone||'Local';$('todayMatchesByGroup').innerHTML=Object.keys(grouped).sort().map(group=>`<section class="card"><div class="card-head"><h3>${esc(group)}</h3><span>${grouped[group].length} partido(s)</span></div><div class="card-body day-grid">${grouped[group].map(matchCard).join('')}</div></section>`).join('')||'<div class="empty">No hay partidos programados para la fecha seleccionada.</div>'}
 function buildMatchSelector(){const list=selectedGames(),open=list.filter(canPredictMatch).length;$('formMatchCount').textContent=`${open} abierto(s) / ${list.length} partido(s)`;if(!list.length){$('matchSelect').innerHTML='<option value="">No hay partidos programados para la fecha seleccionada</option>'}else{$('matchSelect').innerHTML=list.map(g=>{const closed=!canPredictMatch(g);return`<option value="${esc(g.id)}" ${closed?'disabled':''}>${esc(`${fmtTime(g)} · ${g.team1} vs ${g.team2}${closed?' · Cerrado':''}`)}</option>`}).join('');const first=list.find(canPredictMatch);$('matchSelect').value=first?first.id:(list[0]?.id||'')}updateSelectedTeams()}
 function selectedMatch(){const id=$('matchSelect').value;return selectedGames().find(g=>String(g.id)===String(id))}
@@ -78,3 +80,4 @@ $('predictionDate').addEventListener('change',refreshSelectedDateView);$('matchS
 </script>
 </body>
 </html>
+
