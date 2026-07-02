@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-01T23:12:24+00:00",
+  "updatedAt": "2026-07-02T02:58:02+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1147,12 +1147,12 @@
       "stage": "16avos de final",
       "group": "KO",
       "team1": "Estados Unidos",
-      "score": "",
+      "score": "2 - 0",
       "team2": "Bosnia y Herzegovina",
-      "status": "Por definir",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Levi’s Stadium / San Francisco Bay Area Stadium, Santa Clara, Estados Unidos",
-      "notes": "Partido 81 · FIFA automatic update"
+      "notes": "Partido 81 · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "P84",
