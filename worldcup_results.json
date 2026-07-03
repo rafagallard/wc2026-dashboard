@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-02T23:47:32+00:00",
+  "updatedAt": "2026-07-03T01:19:23+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1175,9 +1175,9 @@
       "stage": "16avos de final",
       "group": "KO",
       "team1": "Portugal",
-      "score": "0 - 0",
+      "score": "2 - 1",
       "team2": "Croacia",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Canadá",
       "venue": "BMO Field / Toronto Stadium, Toronto, Canadá",
       "notes": "Partido 83 · FIFA automatic update · ESPN automatic update"
