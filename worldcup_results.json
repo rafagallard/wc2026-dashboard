@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-03T22:31:00+00:00",
+  "updatedAt": "2026-07-03T23:38:35+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1218,7 +1218,7 @@
       "stage": "16avos de final",
       "group": "KO",
       "team1": "Argentina",
-      "score": "1 - 0",
+      "score": "1 - 1",
       "team2": "Cabo Verde",
       "status": "En vivo",
       "host": "Estados Unidos",
