@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-03T21:20:58+00:00",
+  "updatedAt": "2026-07-03T22:31:00+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1218,12 +1218,12 @@
       "stage": "16avos de final",
       "group": "KO",
       "team1": "Argentina",
-      "score": "",
+      "score": "1 - 0",
       "team2": "Cabo Verde",
-      "status": "Por definir",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
-      "notes": "Partido 86 · FIFA automatic update"
+      "notes": "Partido 86 · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "P87",
