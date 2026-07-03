@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-03T01:19:23+00:00",
+  "updatedAt": "2026-07-03T10:25:40+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1189,12 +1189,12 @@
       "stage": "16avos de final",
       "group": "KO",
       "team1": "Suiza",
-      "score": "",
+      "score": "2 - 0",
       "team2": "Argelia",
-      "status": "Por definir",
+      "status": "Final",
       "host": "Canadá",
       "venue": "BC Place / Vancouver Stadium, Vancouver, Canadá",
-      "notes": "Partido 85 · FIFA automatic update"
+      "notes": "Partido 85 · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "P88",
