@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-04T18:36:23+00:00",
+  "updatedAt": "2026-07-04T19:48:55+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1246,9 +1246,9 @@
       "stage": "Octavos de final",
       "group": "KO",
       "team1": "Canadá",
-      "score": "0 - 1",
+      "score": "0 - 3",
       "team2": "Marruecos",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "NRG Stadium / Houston Stadium, Houston, Estados Unidos",
       "notes": "Partido 90 · ESPN automatic update · Cruce confirmado: Canadá vs Marruecos"
