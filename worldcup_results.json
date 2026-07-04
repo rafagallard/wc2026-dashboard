@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-04T01:13:12+00:00",
+  "updatedAt": "2026-07-04T09:58:33+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1232,12 +1232,12 @@
       "stage": "16avos de final",
       "group": "KO",
       "team1": "Colombia",
-      "score": "",
+      "score": "1 - 0",
       "team2": "Ghana",
-      "status": "Por definir",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Arrowhead Stadium / Kansas City Stadium, Kansas City, Estados Unidos",
-      "notes": "Partido 87 · FIFA automatic update"
+      "notes": "Partido 87 · FIFA automatic update · ESPN automatic update"
     },
     {
       "id": "P90",
