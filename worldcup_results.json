@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-04T17:37:45+00:00",
+  "updatedAt": "2026-07-04T18:36:23+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1246,7 +1246,7 @@
       "stage": "Octavos de final",
       "group": "KO",
       "team1": "Canadá",
-      "score": "0 - 0",
+      "score": "0 - 1",
       "team2": "Marruecos",
       "status": "En vivo",
       "host": "Estados Unidos",
