@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-05T20:01:15+00:00",
+  "updatedAt": "2026-07-05T22:14:06+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1274,9 +1274,9 @@
       "stage": "Octavos de final",
       "group": "KO",
       "team1": "Brasil",
-      "score": "0 - 0",
+      "score": "1 - 2",
       "team2": "Noruega",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "MetLife Stadium / New York New Jersey Stadium, East Rutherford, Estados Unidos",
       "notes": "Partido 91 · ESPN automatic update · Knockout propagation update"
@@ -1385,13 +1385,13 @@
       "time": "15:00",
       "stage": "Cuartos de final",
       "group": "KO",
-      "team1": "Round of 16 3 Winner",
+      "team1": "Noruega",
       "score": "",
       "team2": "Round of 16 4 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
-      "notes": "Partido 99 · ESPN automatic update"
+      "notes": "Partido 99 · ESPN automatic update · Knockout propagation update"
     },
     {
       "id": "P100",
