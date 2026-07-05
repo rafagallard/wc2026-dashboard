@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - 'scripts/update_worldcup_results.py'
+      - 'scripts/propagate_knockout_winners.py'
       - '.github/workflows/update-worldcup.yml'
 
 permissions:
@@ -28,6 +29,9 @@ jobs:
 
       - name: Update JSON data
         run: python scripts/update_worldcup_results.py
+
+      - name: Propagate knockout winners
+        run: python scripts/propagate_knockout_winners.py
 
       - name: Commit changes if data changed
         uses: stefanzweifel/git-auto-commit-action@v5
