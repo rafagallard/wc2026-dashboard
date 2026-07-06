@@ -1,0 +1,34 @@
+name: Patch honor board
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/patch_honor_board.py'
+      - '.github/workflows/patch-honor-board.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-page:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Apply honor board patch
+        run: python scripts/patch_honor_board.py
+
+      - name: Commit honor board page
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Add predictions honor board'
+          file_pattern: predicciones.html
