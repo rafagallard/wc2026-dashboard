@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-06T19:20:54+00:00",
+  "updatedAt": "2026-07-06T21:07:34+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1302,9 +1302,9 @@
       "stage": "Octavos de final",
       "group": "KO",
       "team1": "Portugal",
-      "score": "0 - 0",
+      "score": "0 - 1",
       "team2": "España",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
       "notes": "Partido 93 · ESPN automatic update · Knockout propagation update"
@@ -1371,13 +1371,13 @@
       "time": "13:00",
       "stage": "Cuartos de final",
       "group": "KO",
-      "team1": "Round of 16 5 Winner",
+      "team1": "España",
       "score": "",
       "team2": "Round of 16 6 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "SoFi Stadium / Los Angeles Stadium, Los Ángeles, Estados Unidos",
-      "notes": "Partido 98 · ESPN automatic update"
+      "notes": "Partido 98 · ESPN automatic update · Knockout propagation update"
     },
     {
       "id": "P99",
