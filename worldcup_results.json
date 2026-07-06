@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-06T11:54:02+00:00",
+  "updatedAt": "2026-07-06T19:20:54+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1302,9 +1302,9 @@
       "stage": "Octavos de final",
       "group": "KO",
       "team1": "Portugal",
-      "score": "",
+      "score": "0 - 0",
       "team2": "España",
-      "status": "Por definir",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
       "notes": "Partido 93 · ESPN automatic update · Knockout propagation update"
