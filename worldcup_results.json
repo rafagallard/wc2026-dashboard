@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-07T21:01:50+00:00",
+  "updatedAt": "2026-07-07T23:16:25+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1346,10 +1346,11 @@
       "team1": "Suiza",
       "score": "0 - 0",
       "team2": "Colombia",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Canadá",
       "venue": "BC Place / Vancouver Stadium, Vancouver, Canadá",
-      "notes": "Partido 96 · ESPN automatic update · Knockout propagation update"
+      "notes": "Partido 96 · ESPN automatic update · Knockout propagation update",
+      "penalties": "4 - 3"
     },
     {
       "id": "P97",
@@ -1401,7 +1402,7 @@
       "group": "KO",
       "team1": "Argentina",
       "score": "",
-      "team2": "Round of 16 8 Winner",
+      "team2": "Suiza",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Arrowhead Stadium / Kansas City Stadium, Kansas City, Estados Unidos",
