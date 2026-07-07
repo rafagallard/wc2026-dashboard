@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-07T01:19:56+00:00",
+  "updatedAt": "2026-07-07T10:44:19+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1316,9 +1316,9 @@
       "stage": "Octavos de final",
       "group": "KO",
       "team1": "Estados Unidos",
-      "score": "1 - 2",
+      "score": "1 - 4",
       "team2": "Bélgica",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Lumen Field / Seattle Stadium, Seattle, Estados Unidos",
       "notes": "Partido 94 · ESPN automatic update · Knockout propagation update"
@@ -1373,7 +1373,7 @@
       "group": "KO",
       "team1": "España",
       "score": "",
-      "team2": "Round of 16 6 Winner",
+      "team2": "Bélgica",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "SoFi Stadium / Los Angeles Stadium, Los Ángeles, Estados Unidos",
