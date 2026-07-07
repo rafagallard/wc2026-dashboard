@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-07T19:25:52+00:00",
+  "updatedAt": "2026-07-07T21:01:50+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1344,9 +1344,9 @@
       "stage": "Octavos de final",
       "group": "KO",
       "team1": "Suiza",
-      "score": "",
+      "score": "0 - 0",
       "team2": "Colombia",
-      "status": "Por definir",
+      "status": "En vivo",
       "host": "Canadá",
       "venue": "BC Place / Vancouver Stadium, Vancouver, Canadá",
       "notes": "Partido 96 · ESPN automatic update · Knockout propagation update"
