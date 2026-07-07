@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-07T17:46:03+00:00",
+  "updatedAt": "2026-07-07T19:25:52+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1330,9 +1330,9 @@
       "stage": "Octavos de final",
       "group": "KO",
       "team1": "Argentina",
-      "score": "1 - 2",
+      "score": "3 - 2",
       "team2": "Egipto",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Mercedes-Benz Stadium / Atlanta Stadium, Atlanta, Estados Unidos",
       "notes": "Partido 95 · ESPN automatic update · Knockout propagation update"
@@ -1399,13 +1399,13 @@
       "time": "19:00",
       "stage": "Cuartos de final",
       "group": "KO",
-      "team1": "Round of 16 7 Winner",
+      "team1": "Argentina",
       "score": "",
       "team2": "Round of 16 8 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Arrowhead Stadium / Kansas City Stadium, Kansas City, Estados Unidos",
-      "notes": "Partido 100 · ESPN automatic update"
+      "notes": "Partido 100 · ESPN automatic update · Knockout propagation update"
     },
     {
       "id": "P101",
