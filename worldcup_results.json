@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-06T21:07:34+00:00",
+  "updatedAt": "2026-07-07T01:19:56+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1316,9 +1316,9 @@
       "stage": "Octavos de final",
       "group": "KO",
       "team1": "Estados Unidos",
-      "score": "",
+      "score": "1 - 2",
       "team2": "Bélgica",
-      "status": "Por definir",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Lumen Field / Seattle Stadium, Seattle, Estados Unidos",
       "notes": "Partido 94 · ESPN automatic update · Knockout propagation update"
