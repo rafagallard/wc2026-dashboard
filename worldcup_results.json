@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-09T20:04:46+00:00",
+  "updatedAt": "2026-07-09T21:38:44+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1359,7 +1359,7 @@
       "stage": "Cuartos de final",
       "group": "KO",
       "team1": "Marruecos",
-      "score": "0 - 0",
+      "score": "0 - 2",
       "team2": "Francia",
       "status": "En vivo",
       "host": "Estados Unidos",
