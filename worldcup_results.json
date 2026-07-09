@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-09T21:38:44+00:00",
+  "updatedAt": "2026-07-09T22:52:56+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1361,7 +1361,7 @@
       "team1": "Marruecos",
       "score": "0 - 2",
       "team2": "Francia",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Gillette Stadium / Boston Stadium, Foxborough, Estados Unidos",
       "notes": "Partido 97 · ESPN automatic update · Knockout propagation update"
@@ -1414,13 +1414,13 @@
       "time": "13:00",
       "stage": "Semifinal",
       "group": "KO",
-      "team1": "Quarterfinal 1 Winner",
+      "team1": "Francia",
       "score": "",
       "team2": "Quarterfinal 2 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
-      "notes": "Partido 101 · ESPN automatic update"
+      "notes": "Partido 101 · ESPN automatic update · Knockout propagation update"
     },
     {
       "id": "P102",
