@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-10T20:08:06+00:00",
+  "updatedAt": "2026-07-10T21:17:21+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1373,9 +1373,9 @@
       "stage": "Cuartos de final",
       "group": "KO",
       "team1": "España",
-      "score": "1 - 1",
+      "score": "2 - 1",
       "team2": "Bélgica",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "SoFi Stadium / Los Angeles Stadium, Los Ángeles, Estados Unidos",
       "notes": "Partido 98 · ESPN automatic update · Knockout propagation update"
@@ -1416,7 +1416,7 @@
       "group": "KO",
       "team1": "Francia",
       "score": "",
-      "team2": "Quarterfinal 2 Winner",
+      "team2": "España",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
