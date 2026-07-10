@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-09T22:52:56+00:00",
+  "updatedAt": "2026-07-10T20:08:06+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1373,9 +1373,9 @@
       "stage": "Cuartos de final",
       "group": "KO",
       "team1": "España",
-      "score": "",
+      "score": "1 - 1",
       "team2": "Bélgica",
-      "status": "Por definir",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "SoFi Stadium / Los Angeles Stadium, Los Ángeles, Estados Unidos",
       "notes": "Partido 98 · ESPN automatic update · Knockout propagation update"
