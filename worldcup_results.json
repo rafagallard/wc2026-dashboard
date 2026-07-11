@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-11T21:07:50+00:00",
+  "updatedAt": "2026-07-11T22:02:23+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1387,7 +1387,7 @@
       "stage": "Cuartos de final",
       "group": "KO",
       "team1": "Noruega",
-      "score": "0 - 0",
+      "score": "1 - 1",
       "team2": "Inglaterra",
       "status": "En vivo",
       "host": "Estados Unidos",
