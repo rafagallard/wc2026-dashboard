@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-10T21:17:21+00:00",
+  "updatedAt": "2026-07-11T21:07:50+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1387,9 +1387,9 @@
       "stage": "Cuartos de final",
       "group": "KO",
       "team1": "Noruega",
-      "score": "",
+      "score": "0 - 0",
       "team2": "Inglaterra",
-      "status": "Por definir",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
       "notes": "Partido 99 · ESPN automatic update · Knockout propagation update"
