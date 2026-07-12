@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-11T22:02:23+00:00",
+  "updatedAt": "2026-07-12T00:05:02+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1387,9 +1387,9 @@
       "stage": "Cuartos de final",
       "group": "KO",
       "team1": "Noruega",
-      "score": "1 - 1",
+      "score": "1 - 2",
       "team2": "Inglaterra",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
       "notes": "Partido 99 · ESPN automatic update · Knockout propagation update"
@@ -1428,13 +1428,13 @@
       "time": "13:00",
       "stage": "Semifinal",
       "group": "KO",
-      "team1": "Quarterfinal 3 Winner",
+      "team1": "Inglaterra",
       "score": "",
       "team2": "Quarterfinal 4 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Mercedes-Benz Stadium / Atlanta Stadium, Atlanta, Estados Unidos",
-      "notes": "Partido 102 · ESPN automatic update"
+      "notes": "Partido 102 · ESPN automatic update · Knockout propagation update"
     },
     {
       "id": "P103",
