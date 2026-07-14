@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-14T20:44:09+00:00",
+  "updatedAt": "2026-07-14T21:38:48+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1417,7 +1417,7 @@
       "team1": "Francia",
       "score": "0 - 2",
       "team2": "España",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
       "notes": "Partido 101 · ESPN automatic update · Knockout propagation update"
@@ -1442,13 +1442,13 @@
       "time": "15:00",
       "stage": "Tercer lugar",
       "group": "KO",
-      "team1": "Semifinal 1 Loser",
+      "team1": "Francia",
       "score": "",
       "team2": "Semifinal 2 Loser",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
-      "notes": "Partido 103 · ESPN automatic update"
+      "notes": "Partido 103 · ESPN automatic update · Knockout propagation update"
     },
     {
       "id": "P104",
@@ -1456,13 +1456,13 @@
       "time": "13:00",
       "stage": "Final",
       "group": "KO",
-      "team1": "Semifinal 1 Winner",
+      "team1": "España",
       "score": "",
       "team2": "Semifinal 2 Winner",
       "status": "Por definir",
       "host": "Estados Unidos",
       "venue": "MetLife Stadium / New York New Jersey Stadium, East Rutherford, Estados Unidos",
-      "notes": "Partido 104 · Final · ESPN automatic update"
+      "notes": "Partido 104 · Final · ESPN automatic update · Knockout propagation update"
     }
   ]
 }
