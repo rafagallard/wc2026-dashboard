@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-12T09:41:40+00:00",
+  "updatedAt": "2026-07-14T19:43:16+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1415,9 +1415,9 @@
       "stage": "Semifinal",
       "group": "KO",
       "team1": "Francia",
-      "score": "",
+      "score": "0 - 1",
       "team2": "España",
-      "status": "Por definir",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "AT&T Stadium / Dallas Stadium, Arlington, Estados Unidos",
       "notes": "Partido 101 · ESPN automatic update · Knockout propagation update"
