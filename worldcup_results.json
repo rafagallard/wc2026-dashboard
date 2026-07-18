@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-15T21:41:42+00:00",
+  "updatedAt": "2026-07-18T21:01:45+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1443,9 +1443,9 @@
       "stage": "Tercer lugar",
       "group": "KO",
       "team1": "Francia",
-      "score": "",
+      "score": "0 - 0",
       "team2": "Inglaterra",
-      "status": "Por definir",
+      "status": "En vivo",
       "host": "Estados Unidos",
       "venue": "Hard Rock Stadium / Miami Stadium, Miami, Estados Unidos",
       "notes": "Partido 103 · ESPN automatic update · Knockout propagation update"
