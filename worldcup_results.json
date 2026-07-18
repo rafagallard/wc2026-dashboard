@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-18T21:59:45+00:00",
+  "updatedAt": "2026-07-18T22:51:17+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1443,7 +1443,7 @@
       "stage": "Tercer lugar",
       "group": "KO",
       "team1": "Francia",
-      "score": "0 - 4",
+      "score": "3 - 5",
       "team2": "Inglaterra",
       "status": "En vivo",
       "host": "Estados Unidos",
