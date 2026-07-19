@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-19T19:46:40+00:00",
+  "updatedAt": "2026-07-19T22:13:47+00:00",
   "timezone": "America/Mexico_City",
   "refreshHours": 1,
   "sourceLabel": "FIFA official matches API + ESPN public scoreboard",
@@ -1457,9 +1457,9 @@
       "stage": "Final",
       "group": "KO",
       "team1": "España",
-      "score": "0 - 0",
+      "score": "1 - 0",
       "team2": "Argentina",
-      "status": "En vivo",
+      "status": "Final",
       "host": "Estados Unidos",
       "venue": "MetLife Stadium / New York New Jersey Stadium, East Rutherford, Estados Unidos",
       "notes": "Partido 104 · Final · ESPN automatic update · Knockout propagation update"
